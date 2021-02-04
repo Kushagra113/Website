@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <title>SignUp Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+    <!-- Custom Theme files -->
+    <link href="sign.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="other_navlink.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- //Custom Theme files -->
+
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- //web font -->
+</head>
+
+<body>
+    <!-- main -->
+    <ul>
+        <li>
+            <a href="/">SignUp</a>
+            <span class="sclass"></span>
+        </li>
+        <li>
+            <a href="/login">Login</a>
+            <span class="sclass"></span>
+        </li>
+    </ul>
+    <div class="main-w3layouts wrapper">
+        <h1>SignUp Form</h1>
+        <div class="main-agileinfo">
+            <div class="agileits-top">
+                <!-- onsubmit="return formValidation()" -->
+                <form action="/sign" method="post">
+                    <%- include ("./partials/messages"); %>
+                        <label class="cl" for="Username">Username</label>
+                        <input class="text" id="username" type="text" name="Username">
+                        <label class="cl" for="email">Email</label>
+                        <input class="text" id="email" type="email" name="email">
+                        <label class="cl" for="password">Password</label>
+                        <input class="text" id="passid" type="password" name="password">
+                        <label class="cl" for="password2">Confirm Password</label>
+                        <input class="text" id="retype_pass" type="password" name="password2">
+                        <div class="wthree-text">
+                            <label class="anim">
+							<input type="checkbox" class="checkbox" required="">
+                			I Agree To The Terms & Conditions
+						</label>
+
+                            <div class="clear"> </div>
+                        </div>
+                        <input type="submit" value="SIGNUP">
+                </form>
+                <p>Already have a account?<a href="/login"> Login Now!</a></p>
+            </div>
+        </div>
+
+        <ul class="colorlib-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="signup_script.js">
+    </script>
+    <!-- //main -->
+</body>
+
+</html>

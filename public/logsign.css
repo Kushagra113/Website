@@ -1,0 +1,211 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  background: url('http://s8.favim.com/orig/150322/art-artsy-arty-background-Favim.com-2584108.jpg');
+  background-size: cover;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 600px;
+  height: 420px;
+  position: relative;
+  perspective: 800px;
+	margin: 3rem auto;
+}
+
+#options {
+	margin: 0px auto;
+  margin-top: -20px;
+	width: 200px;
+	text-align: center;
+}
+
+#card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+#card figure {
+  margin: 0;
+  position: absolute;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: space-between;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 1px 3px rgba(0,0,0,.3);
+  backface-visibility: hidden;
+}
+
+.logo {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  height: 50px;
+  width: 50px;
+}
+
+.back-logo {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  height: 50px;
+  width: 50px;
+  transform: rotateY(180deg);
+}
+
+.logo img, .back-logo img {
+  height: 50px;
+}
+
+#card .front {
+  background: white;
+}
+#card .back {
+  background: white;
+  transform: rotateY( 180deg );
+}
+
+#card.flipped {
+  transform: rotateY( 180deg );
+}
+
+@keyframes powerFlip {
+  from {
+    box-shadow: 5px 10px 5px rgba(0,0,0,0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+    box-shadow: 0px 4px 20px 20px rgba(142, 68, 173,0.1);
+  }
+}
+
+@keyframes powerFlipTwo {
+  from {
+    box-shadow: 5px 10px 5px rgba(0,0,0,0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+    box-shadow: 0px 4px 20px 20px rgba(142, 68, 173,0.1);
+  }
+}
+
+
+#flip {
+  animation-name: powerFlipTwo;
+  animation-timing-function: easeIn;
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  animation-iteration: 1;
+  height: 30px;
+  width: 200px;
+  background: #9b59b6;
+  border: none;
+  font-size: 1rem;
+  color: white;
+  transition: all 150ms;
+  cursor: pointer;
+}
+
+#flip:hover {
+  background: #8e44ad;
+}
+
+#flip.powered {
+  animation-name: powerFlip;
+  animation-timing-function: easeIn;
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  animation-iteration: 1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input {
+  margin-bottom: 1rem;
+}
+
+.front .form-side {
+  padding-top: 50px;
+  padding-left: 1rem;
+  width: 40%;
+  height: 100%;
+}
+
+.back .form-side {
+  padding-top: 50px;
+  padding-right: 1rem;
+  width: 40%;
+  height: 100%;
+}
+
+
+.front .photo-side {
+  width: 50%;
+  height: 100%;
+  background: url('https://image.freepik.com/free-vector/startup-background-with-rocket_1302-791.jpg');
+  background-size: cover;
+  background-position: right;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.back .photo-side {
+  width: 50%;
+  height: 100%;
+  background: url('https://image.freepik.com/free-vector/startup-background-with-rocket-laptop_1302-813.jpg');
+  background-size: cover;
+  background-position: left;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+
+}
+
+label {
+  font-size: 90%;
+  margin-bottom: 5px;
+}
+
+.form input {
+  height: 20px;
+  padding-left: 3px;
+}
+
+.lgn-btn {
+  background: rgba(52, 152, 219,1.0);
+  color: white;
+  border: none;
+  height: 30px;
+  cursor: pointer;
+}
+
+.terms a {
+  color: rgba(41, 128, 185,1.0);
+  text-decoration: none;
+}
+
+.github {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(155, 89, 182,1.0);
+  padding: 9px 20px 9px 20px;
+  color: white;
+  text-decoration: none;
+  font-family: sans-serif;
+  border-radius: 20px;
+  cursor: pointer;
+  z-index: -1;
+  font-size: 10px;
+}
