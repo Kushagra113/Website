@@ -44,13 +44,13 @@ module.exports = function(passport) {
 
     );
     passport.serializeUser((user, done) => {
-        console.log(user[0].id);
+        // console.log(user[0].id);
         done(null, user[0].id);
     });
 
     passport.deserializeUser((id, done) => {
         con.query("select * from account where id =?", [id], (err, user) => {
-            console.log(user);
+            // console.log(user);
             done(err, user[0]);
         });
     });

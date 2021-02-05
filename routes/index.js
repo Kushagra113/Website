@@ -80,7 +80,7 @@ router.post("/sign", (req, res) => {
                             if (err) {
                                 throw err;
                             } else {
-                                console.log(password);
+                                // console.log(password);
                                 password_hashed = hash
                                 sql = "insert into account(username,email,password) values(?,?,?)";
                                 con.query(sql, [Username, email, password_hashed], (err) => {
