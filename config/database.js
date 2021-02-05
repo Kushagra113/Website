@@ -13,7 +13,7 @@ con.connect((err) => {
     if (err) {
         throw err;
     } else {
-        console.log("MySQL Connected");
+        // console.log("MySQL Connected");
     }
 })
 
@@ -22,7 +22,7 @@ con.query("create database if not exists users", (err) => {
     if (err) {
         throw err;
     } else {
-        console.log("Database Created");
+        // console.log("Database Created");
     }
 })
 
