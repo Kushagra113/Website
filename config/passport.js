@@ -17,6 +17,9 @@ con.connect((err) => {
     }
 })
 
+// Global Variable
+let user_id_loggedin;
+
 module.exports = function(passport) {
     passport.use(
         new local_strategy({ usernameField: "Username" }, (Username, password, done) => {
@@ -44,7 +47,6 @@ module.exports = function(passport) {
 
     );
     passport.serializeUser((user, done) => {
-        // console.log(user[0].id);
         done(null, user[0].id);
     });
 
@@ -56,3 +58,4 @@ module.exports = function(passport) {
     });
 
 };
+
