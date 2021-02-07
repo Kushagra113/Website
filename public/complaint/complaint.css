@@ -1,0 +1,10 @@
+body{
+    background-color: rgb(178, 180, 35) ;
+}
+
+table thead th{
+    padding: 0px 50px;
+}
+thead th,td{
+    border: 1px solid black;
+}

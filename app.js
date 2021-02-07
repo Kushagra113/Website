@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const flash = require("connect-flash");
 const session = require("express-session");
 const authentication = require("./config/auth").ensureAuthenticated;
+const bodyParser = require("body-parser");
+const { ensureAuthenticated } = require("./config/auth");
 
 // Configuring Enviroment Variables File
 dotenv.config();
@@ -18,7 +20,7 @@ require("./config/passport")(passport);
 // Database
 require("./config/database.js");
 
-// Setting Static Folder for express
+// Setting Static Folder for express 
 app.use(express.static(__dirname + "/public"));
 
 // Setting View Engine To EJS
@@ -26,6 +28,7 @@ app.set("view engine", "ejs");
 
 // Body Parser
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Express session
 app.use(
@@ -52,15 +55,16 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.get("/home", authentication, require("./routes/index"));
-app.get("/", require("./routes/index"));
-app.get("/login", require("./routes/index"));
-app.get("/payment", authentication, require("./routes/index"));
-app.get("/logout", require("./routes/index"));
+app.use("/users", require("./routes/users"));
+app.use("/", require("./routes/index"));
 
 // Post Requests
-app.post("/sign", require("./routes/index"));
-app.post("/login", require("./routes/index"));
+app.post('/endpoint', function(req, res){
+	var obj = {};
+	console.log('body: ' + JSON.stringify(req.body));
+	res.send(req.body);
+});
+
 
 // Server Port
-app.listen(3001, () => console.log("Server is running"));
+app.listen(3000, () => console.log("Server is running"));
