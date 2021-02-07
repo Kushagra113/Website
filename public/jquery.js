@@ -25,7 +25,28 @@ $(document).ready(function(){
             }
         });
     });
-
+    $(document).on('click','button.del',function(){  
+        // $(".del").click(function(){
+        var id = $(this).parent().find('button.del').val(); 
+        console.log(id);
+        $.ajax({  
+            url:'/users/complaint/removecomplaint',  
+            method:'delete',  
+            dataType:'json',  
+            data:{'id':id},  
+            success:function(response){  
+                if(response.msg=='success'){  
+                    alert('data deleted');  
+                    getData();  
+                }else{  
+                    alert('data did not get deleted');  
+                }  
+            },  
+            error:function(){  
+                     alert('server error')     
+            }  
+        });  
+    }); 
     function getData(){
         $.ajax({
             url:'/users/complaint/getdata',
@@ -41,7 +62,7 @@ $(document).ready(function(){
                         $.each(response.data,function(index,data){  
                             var url = url+data._id;  
                             index+=1;  
-                        $('tbody').append("<tr class='taskrow'><td>"+ index +"</td><td>"+data.complaint+"</td><td>"+"<button class='del' value='"+data._id+"'>delete</button>"+"</td></tr>");   
+                        $('tbody').append("<tr class='taskrow'><td>"+ index +"</td><td>"+data.complaint+"</td><td>"+"<button class='del' value='"+data.id+"'>Delete</button>"+"</td></tr>");   
                         });  
                     }
                 }

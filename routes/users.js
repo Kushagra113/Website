@@ -33,6 +33,18 @@ router.get("/complaint/getdata",auth_function,(req,res)=>{
     })
 })
 
+router.delete("/complaint/removecomplaint",auth_function,(req,res)=>{
+    complaints.removecomplaint(req.body.id,(err,result)=>{
+        if(err){
+            console.log(err);
+            res.json({msg:"error"});
+        }
+        else{
+            res.json({msg:"success"});
+        }
+    });
+});
+
 
 // Adding To The Database
 router.post("/complaint",auth_function,(req,res)=>{

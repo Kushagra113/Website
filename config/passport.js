@@ -52,7 +52,6 @@ module.exports = function(passport) {
 
     passport.deserializeUser((id, done) => {
         con.query("select * from account where id =?", [id], (err, user) => {
-            // console.log(user);
             done(err, user[0]);
         });
     });

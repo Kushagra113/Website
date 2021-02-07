@@ -27,3 +27,18 @@ module.exports.getcomplaint=(cb)=>{
         }
     })
 }
+
+module.exports.removecomplaint=(id,cb)=>{
+    sql=`delete from complaints where id=?`;
+    console.log(id);
+    con.query(sql,id,(err,result)=>{
+        console.log(id);
+        if(err){
+            console.log(err);
+            cb(err,null);
+        }
+        else{
+            cb(null,result)
+        }
+    })
+}
