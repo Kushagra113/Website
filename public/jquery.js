@@ -27,8 +27,7 @@ $(document).ready(function(){
     });
     $(document).on('click','button.del',function(){  
         // $(".del").click(function(){
-        var id = $(this).parent().find('button.del').val(); 
-        console.log(id);
+        var id = $(this).parent().find('button.del').val();
         $.ajax({  
             url:'/users/complaint/removecomplaint',  
             method:'delete',  
@@ -38,7 +37,11 @@ $(document).ready(function(){
                 if(response.msg=='success'){  
                     alert('data deleted');  
                     getData();  
-                }else{  
+                }
+                else if(response.msg=="user_error"){
+                    alert("You Cannot Delete Other Users Complaints Sorry!");
+                }
+                else{  
                     alert('data did not get deleted');  
                 }  
             },  
@@ -60,7 +63,7 @@ $(document).ready(function(){
                     }
                     else{
                         $.each(response.data,function(index,data){  
-                            var url = url+data._id;  
+                            var url = url+data.id;  
                             index+=1;  
                         $('tbody').append("<tr class='taskrow'><td>"+ index +"</td><td>"+data.complaint+"</td><td>"+"<button class='del' value='"+data.id+"'>Delete</button>"+"</td></tr>");   
                         });  

@@ -22,6 +22,7 @@ router.get("/complaint",auth_function,(req,res)=>{
     res.render("complaint");
 })
 
+// Printing All The Complaints
 router.get("/complaint/getdata",auth_function,(req,res)=>{
     complaints.getcomplaint((err,result)=>{
         if(err){
@@ -33,16 +34,24 @@ router.get("/complaint/getdata",auth_function,(req,res)=>{
     })
 })
 
+// Deleting The Complaint
 router.delete("/complaint/removecomplaint",auth_function,(req,res)=>{
-    complaints.removecomplaint(req.body.id,(err,result)=>{
-        if(err){
-            console.log(err);
-            res.json({msg:"error"});
-        }
-        else{
-            res.json({msg:"success"});
-        }
-    });
+    // console.log("1."+req.body.id);
+    // console.log("2."+req.user.id);
+    if(req.user.id==req.body.id){
+        complaints.removecomplaint(req.body.id,(err,result)=>{
+            if(err){
+                console.log(err);
+                res.json({msg:"error"});
+            }
+            else{
+                res.json({msg:"success"});
+            }
+        });
+    }
+    else{
+        res.json({msg:"user_error"});
+    }
 });
 
 
