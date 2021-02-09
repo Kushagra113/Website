@@ -15,6 +15,18 @@ module.exports.addcomplaint=(name,complaint,user_id,cb)=>{
     })
 }
 
+module.exports.check_complaints=(complaint,id,cb)=>{
+    sql="select id,complaint from complaints where id=? and complaint=?"
+    con.query(sql,[id,complaint],(err,result)=>{
+        if(err){
+            cb(err,null);
+        }
+        else{
+            cb(null,result);
+        }
+    })
+}
+
 module.exports.getcomplaint=(cb)=>{
     sql=`select * from complaints`;
     con.query(sql,(err,result)=>{
@@ -28,9 +40,10 @@ module.exports.getcomplaint=(cb)=>{
     })
 }
 
-module.exports.removecomplaint=(id,cb)=>{
-    sql=`delete from complaints where id=?`;
-    con.query(sql,id,(err,result)=>{
+module.exports.removecomplaint=(id,complaint,cb)=>{
+    sql=`delete from complaints where id=? and complaint=?`;
+    // console.log(id);
+    con.query(sql,[id,complaint],(err,result)=>{
         if(err){
             console.log(err);
             cb(err,null);

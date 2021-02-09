@@ -37,9 +37,8 @@ router.get("/complaint/getdata",auth_function,(req,res)=>{
 // Deleting The Complaint
 router.delete("/complaint/removecomplaint",auth_function,(req,res)=>{
     // console.log("1."+req.body.id);
-    // console.log("2."+req.user.id);
     if(req.user.id==req.body.id){
-        complaints.removecomplaint(req.body.id,(err,result)=>{
+        complaints.removecomplaint(req.body.id,req.body.complaint,(err,result)=>{
             if(err){
                 console.log(err);
                 res.json({msg:"error"});
@@ -59,12 +58,22 @@ router.delete("/complaint/removecomplaint",auth_function,(req,res)=>{
 router.post("/complaint",auth_function,(req,res)=>{
     const {name,complaint} = req.body;
     const user_id = req.user.id;
-    complaints.addcomplaint(name,complaint,user_id,(err,result)=>{
+    complaints.check_complaints(complaint,user_id,(err,result)=>{
         if(err){
             res.json({msg:"error"});
         }
+        else if(result.length>0){    
+            res.json({msg:"same_complaint"});
+        }
         else{
-            res.json({msg:"success"});
+            complaints.addcomplaint(name,complaint,user_id,(err,result)=>{
+                if(err){
+                    res.json({msg:"error"});
+                }
+                else{
+                    res.json({msg:"success"});
+                }
+            }); 
         }
     });
 });

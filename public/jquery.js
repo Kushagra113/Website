@@ -15,6 +15,9 @@ $(document).ready(function(){
                     // alert("Name Added In the Database");
                     getData();
                 }
+                else if(response.msg=="same_complaint"){
+                    alert("Complaint Already Added")
+                }
                 else{
                     alert("Some Error Occured Try Again");
                 }
@@ -28,11 +31,13 @@ $(document).ready(function(){
     $(document).on('click','button.del',function(){  
         // $(".del").click(function(){
         var id = $(this).parent().find('button.del').val();
+        var complaint=[];
+        complaint.push($(this).parent().parent().find(".complaint_text").html());
         $.ajax({  
             url:'/users/complaint/removecomplaint',  
             method:'delete',  
             dataType:'json',  
-            data:{'id':id},  
+            data:{'id':id,complaint:complaint[0]},  
             success:function(response){  
                 if(response.msg=='success'){  
                     alert('data deleted');  
@@ -65,7 +70,7 @@ $(document).ready(function(){
                         $.each(response.data,function(index,data){  
                             var url = url+data.id;  
                             index+=1;  
-                        $('tbody').append("<tr class='taskrow'><td>"+ index +"</td><td>"+data.complaint+"</td><td>"+"<button class='del' value='"+data.id+"'>Delete</button>"+"</td></tr>");   
+                        $('tbody').append("<tr class='taskrow'><td class='name'>"+ data.name +"</td><td class='complaint_text'>"+data.complaint+"</td><td>"+"<button class='edit'>Edit</button>"+"<button class='del' value='"+data.id+"'>Delete</button>"+"</td></tr>");   
                         });  
                     }
                 }
