@@ -29,7 +29,7 @@ $(document).ready(function(){
         });
     });
     $(document).on('click','button.del',function(){  
-        // $(".del").click(function(){
+
         var id = $(this).parent().find('button.del').val();
         var complaint=[];
         complaint.push($(this).parent().parent().find(".complaint_text").html());
@@ -55,6 +55,41 @@ $(document).ready(function(){
             }  
         });  
     }); 
+    $(document).on('click','button.edit',function(e){
+        var id = $(this).parent().find('button.edit').val();
+        complaint=($(this).parent().parent().find(".complaint_text").html());
+        $(".edit_block").show();
+        $(document).one("click","#done",function(){
+            var new_complaint = $(document).find("#edit_complaint").val();
+            console.log("New Complaint"+new_complaint);
+                $.ajax({  
+                        url:'/users/complaint/editcomplaint',  
+                        method:'post',  
+                        dataType:'json', 
+                        data:{'id':id,complaint:complaint,newComplaint:new_complaint}, 
+                        success:function(response){  
+                            if(response.msg=='success'){  
+                                console.log("Msg"+response.msg);
+                                alert('data successfully Edited');  
+                                getData();  
+                            }
+                            else if(response.msg=="user_error"){
+                                alert("You Cannot Edit Other Users Complaints Sorry!");
+                            }
+                            else if(response.msg=="same_complaint"){
+                                alert("Complaint Already Added")
+                            }
+                            else{  
+                                alert('Editing was not Successfull Please Try Again');  
+                            }  
+                        },  
+                        error:function(){  
+                                    alert('server error')     
+                        }  
+                    });  
+                    $(".edit_block").hide();
+        });
+    }); 
     function getData(){
         $.ajax({
             url:'/users/complaint/getdata',
@@ -70,7 +105,7 @@ $(document).ready(function(){
                         $.each(response.data,function(index,data){  
                             var url = url+data.id;  
                             index+=1;  
-                        $('tbody').append("<tr class='taskrow'><td class='name'>"+ data.name +"</td><td class='complaint_text'>"+data.complaint+"</td><td>"+"<button class='edit'>Edit</button>"+"<button class='del' value='"+data.id+"'>Delete</button>"+"</td></tr>");   
+                        $('tbody').append("<tr class='taskrow'><td class='name'>"+ data.name +"</td><td class='complaint_text'>"+data.complaint+"</td><td>"+"<button class='edit' value='"+data.id+"'>Edit</button>"+"<button class='del' value='"+data.id+"'>Delete</button>"+"</td></tr>");   
                         });  
                     }
                 }
@@ -83,6 +118,6 @@ $(document).ready(function(){
             }  
         })
     }
-
-
+    
+    
 });

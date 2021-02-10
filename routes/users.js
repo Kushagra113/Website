@@ -53,6 +53,37 @@ router.delete("/complaint/removecomplaint",auth_function,(req,res)=>{
     }
 });
 
+// Editing The Complaint
+router.post("/complaint/editcomplaint",auth_function,(req,res)=>{
+    const {id,complaint,newComplaint}=req.body;
+    // console.log("id"+id+"Id2:"+req.user.id+"complaint"+complaint+"New Complaint"+newComplaint);
+    if(req.user.id==id){
+        complaints.check_complaints(newComplaint,id,(err,result)=>{
+            if(err){
+                res.json({msg:"error"});
+            }
+            else if(result.length>0){    
+                res.json({msg:"same_complaint"});
+            }
+            else{
+                complaints.editcomplaint(id,complaint,newComplaint,(err,result)=>{
+                    if(err){
+                        console.log(err);
+                        res.json({msg:"error"});
+                    }
+                    else{
+                        res.json({msg:"success"});
+                    }
+                });
+            }
+        })
+    }
+    else{
+        console.log("Success!@#");
+        res.json({msg:"user_error"});
+    }
+});
+
 
 // Adding To The Database
 router.post("/complaint",auth_function,(req,res)=>{

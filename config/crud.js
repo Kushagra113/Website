@@ -53,3 +53,16 @@ module.exports.removecomplaint=(id,complaint,cb)=>{
         }
     })
 }
+
+module.exports.editcomplaint=(id,complaint,newComplaint,cb)=>{
+    sql="update complaints set complaint=? where id=? and complaint=?";
+    con.query(sql,[newComplaint,id,complaint],(err,result)=>{
+        if(err){
+            console.log(err);
+            cb(err,null);
+        }
+        else{
+            cb(null,result);
+        }
+    });
+}

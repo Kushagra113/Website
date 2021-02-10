@@ -8,3 +8,6 @@ table thead th{
 thead th,td{
     border: 1px solid black;
 }
+.edit_block{
+    display: none;
+}

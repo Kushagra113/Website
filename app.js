@@ -59,11 +59,11 @@ app.use("/users", require("./routes/users"));
 app.use("/", require("./routes/index"));
 
 // Post Requests
-app.post('/endpoint', function(req, res){
-	var obj = {};
-	console.log('body: ' + JSON.stringify(req.body));
-	res.send(req.body);
-});
+// app.post('/endpoint', function(req, res){
+// 	var obj = {};
+// 	console.log('body: ' + JSON.stringify(req.body));
+// 	res.send(req.body);
+// });
 
 
 // Server Port
