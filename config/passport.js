@@ -1,24 +1,7 @@
 const local_strategy = require("passport-local").Strategy;
 const mysql = require("mysql");
 const bcrypt = require("bcryptjs");
-
-// Creating Connection
-const con = mysql.createConnection({
-    host: process.env.database_host,
-    user: process.env.database_user,
-    password: process.env.database_password,
-    database: process.env.database
-});
-
-// Connecting to the database
-con.connect((err) => {
-    if (err) {
-        throw err;
-    }
-})
-
-// Global Variable
-let user_id_loggedin;
+const con =require("./database");
 
 module.exports = function(passport) {
     passport.use(
