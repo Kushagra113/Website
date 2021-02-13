@@ -105,7 +105,7 @@ $(document).ready(function(){
                         $.each(response.data,function(index,data){  
                             var url = url+data.id;  
                             index+=1;  
-                        $('tbody').append("<tr class='taskrow'><td class='name'>"+ data.name +"</td><td class='complaint_text'>"+data.complaint+"</td><td>"+"<button class='edit' value='"+data.id+"'>Edit</button>"+"<button class='del' value='"+data.id+"'>Delete</button>"+"</td></tr>");   
+                        $('tbody').append("<tr class='taskrow'><td class='name'>"+ data.name +"</td><td class='complaint_text'>"+data.complaint+"</td><td>"+"<button class='edit' value='"+data.id+"'>Edit</button>"+"<button class='del'  value='"+data.id+"'>Delete</button>"+"</td></tr>");   
                         });  
                     }
                 }
