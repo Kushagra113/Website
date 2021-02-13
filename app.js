@@ -4,9 +4,7 @@ const passport = require("passport");
 const dotenv = require("dotenv");
 const flash = require("connect-flash");
 const session = require("express-session");
-const authentication = require("./config/auth").ensureAuthenticated;
 const bodyParser = require("body-parser");
-const { ensureAuthenticated } = require("./config/auth");
 
 // Configuring Enviroment Variables File
 dotenv.config();
