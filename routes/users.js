@@ -5,25 +5,25 @@ const bcrypt = require("bcryptjs");
 var con = require("../config/database");
 const passport = require("passport");
 const complaints = require("../config/crud");
-const auth_function = require("../config/auth").ensureAuthenticated;
+const auth_function = require("../config/auth");
 
 // Home Page
-router.get("/home",auth_function ,(req, res) => {
+router.get("/home",auth_function.ensureAuthenticated ,(req, res) => {
     res.render("home");
 })
 
 // Payment Page
-router.get("/payment", auth_function,(req, res) => {
+router.get("/payment", auth_function.ensureAuthenticated,(req, res) => {
     res.render("payment");
 })
 
 // Complaint page
-router.get("/complaint",auth_function,(req,res)=>{
+router.get("/complaint",auth_function.ensureAuthenticated,(req,res)=>{
     res.render("complaint");
 })
 
 // Printing All The Complaints
-router.get("/complaint/getdata",auth_function,(req,res)=>{
+router.get("/complaint/getdata",auth_function.ensureAuthenticated,(req,res)=>{
     complaints.getcomplaint((err,result)=>{
         if(err){
             res.json({msg:"error"});
@@ -35,7 +35,7 @@ router.get("/complaint/getdata",auth_function,(req,res)=>{
 })
 
 // Deleting The Complaint
-router.delete("/complaint/removecomplaint",auth_function,(req,res)=>{
+router.delete("/complaint/removecomplaint",auth_function.ensureAuthenticated,(req,res)=>{
     // console.log("1."+req.body.id);
     if(req.user.id==req.body.id){
         complaints.removecomplaint(req.body.id,req.body.complaint,(err,result)=>{
@@ -54,7 +54,7 @@ router.delete("/complaint/removecomplaint",auth_function,(req,res)=>{
 });
 
 // Editing The Complaint
-router.post("/complaint/editcomplaint",auth_function,(req,res)=>{
+router.post("/complaint/editcomplaint",auth_function.ensureAuthenticated,(req,res)=>{
     const {id,complaint,newComplaint}=req.body;
     // console.log("id"+id+"Id2:"+req.user.id+"complaint"+complaint+"New Complaint"+newComplaint);
     if(req.user.id==id){
@@ -86,8 +86,9 @@ router.post("/complaint/editcomplaint",auth_function,(req,res)=>{
 
 
 // Adding To The Database
-router.post("/complaint",auth_function,(req,res)=>{
-    const {name,complaint} = req.body;
+router.post("/complaint",auth_function.ensureAuthenticated,(req,res)=>{
+    const complaint = req.body.complaint;
+    const name = req.user.username;
     const user_id = req.user.id;
     complaints.check_complaints(complaint,user_id,(err,result)=>{
         if(err){

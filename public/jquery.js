@@ -2,14 +2,14 @@ $(document).ready(function(){
             // get Data	
     getData();			
     $("#add").click(function(){
-        var name=$("#name").val();
+        // var name=$("#name").val();
         var c = $("#complaint_text").val();
         // alert(name);
         $.ajax({
             URL:'/users/complaint',
             method: 'POST',
             dataType:'json',
-            data: {'name':name,'complaint':c},
+            data: {'complaint':c},
             success:function(response){
                 if(response.msg=='success'){
                     // alert("Name Added In the Database");
