@@ -24,9 +24,11 @@
             <div class="d-flex">
                 <div class="collapse navbar-collapse pull-right" id="navbarlist">
                     <div class="navbar-nav">
-                        <a class="nav-link active r-link link text-underlined" id='1' aria-current="page" href="/users/home">Home</a>
+                        <a class="nav-link active r-link link text-underlined" id='1' aria-current="page"
+                         <%if(user.admin){%>href='/admin/home'<%}else{%>href='/users/home'<%}%>>Home</a>
                         <a class="nav-link r-link link text-underlined" id='4' href="/users/payment">Donate</a>
-                        <a class="nav-link r-link link text-underlined" id='4' href="/users/complaint">Complaint</a>
+                        <a class="nav-link r-link link text-underlined" id='4' <%if(user.admin){%>href='/admin/complaint'<%}else{%>href='/users/complaint'<%}%>
+                            >Complaint</a>
                         <a class="nav-link r-link link text-underlined" href="/users/logout">Logout</a>
                     </div>
                 </div>

@@ -9,7 +9,9 @@ const auth_function = require("../config/auth");
 
 // Home Page
 router.get("/home",auth_function.ensureAuthenticated ,(req, res) => {
-    res.render("home");
+    res.render("home",{
+        user:req.user
+    });
 })
 
 // Payment Page
@@ -19,7 +21,9 @@ router.get("/payment", auth_function.ensureAuthenticated,(req, res) => {
 
 // Complaint page
 router.get("/complaint",auth_function.ensureAuthenticated,(req,res)=>{
-    res.render("complaint");
+    res.render("complaint",{
+        user:req.user
+    });
 })
 
 // Printing All The Complaints
@@ -34,9 +38,9 @@ router.get("/complaint/getdata",auth_function.ensureAuthenticated,(req,res)=>{
     })
 })
 
+
 // Deleting The Complaint
 router.delete("/complaint/removecomplaint",auth_function.ensureAuthenticated,(req,res)=>{
-    // console.log("1."+req.body.id);
     if(req.user.id==req.body.id){
         complaints.removecomplaint(req.body.id,req.body.complaint,(err,result)=>{
             if(err){
@@ -185,11 +189,26 @@ router.post("/sign", (req, res) => {
 
 // Login Handle
 router.post("/login", (req, res, next) => {
-    passport.authenticate("local", {
-        successRedirect: "/users/home",
-        failureRedirect: "/login",
-        failureFlash: true
-    })(req, res, next);
+    // console.log(req.body.Username);
+    con.query("select admin from account where username=?",[req.body.Username],(error,result)=>{
+        if(error){
+            req.flash("error_msg","Server Error Occured");
+        }
+        else if(result[0].admin==1){
+            passport.authenticate("local", {
+                successRedirect: "/admin/home",
+                failureRedirect: "/login",
+                failureFlash: true
+            })(req, res, next);        
+        }
+        else{
+            passport.authenticate("local", {
+                successRedirect: "/users/home",
+                failureRedirect: "/login",
+                failureFlash: true
+            })(req, res, next);
+        }
+    });
 })
 
 // Logout Handle

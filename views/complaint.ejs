@@ -50,7 +50,7 @@
         </div>
         </table>
         </div>
-        <div class="row">
+        <div <%if(user.admin){%> class='row' style='display:none' <%}else{%> class='row'<%}%>>
             <label for="complaint_text">Complaint</label>
             <input type="text" id="complaint_text" style="margin-bottom: 30px;">
             <br>

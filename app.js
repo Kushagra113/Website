@@ -53,8 +53,9 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use("/users", require("./routes/users"));
 app.use("/", require("./routes/index"));
+app.use("/users", require("./routes/users"));
+app.use("/admin", require("./routes/admin"));
 
 // Post Requests
 // app.post('/endpoint', function(req, res){

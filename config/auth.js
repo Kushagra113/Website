@@ -11,5 +11,12 @@ module.exports = {
             return next();
         }
         res.redirect("/users/home");
+    },
+    ensureAdmin: function(req, res, next) {
+        if (req.isAuthenticated() && req.user.admin) {
+            return next();
+        }
+        req.flash('error_msg', 'Please log in to view that resource');
+        res.redirect('/login');
     }
 };
