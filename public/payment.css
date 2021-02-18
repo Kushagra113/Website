@@ -565,13 +565,20 @@ button::before {
   }
 }
 .paytm{
-    left: 500px;
-    top: 200px;
+    left: 750px;
+    top: 190px;
 }
 .paytm_image{
     position: absolute;
-    left: 700px;
-    top: 550px;
+    left: 750px;
+    top: 650px;
     height: 300px;
     width: 100px;
 }
+#paypal-button-container{
+    margin-left: 500px !important;
+    width: 10px;
+    /* position: absolute !important;
+    bottom: 20px; */
+    margin-top: 150px;
+  }
