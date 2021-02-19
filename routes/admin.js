@@ -21,6 +21,13 @@ router.get("/complaint",auth_function.ensureAdmin,(req,res)=>{
     })
 });
 
+// Admin Payment Page
+router.get("/payment", auth_function.ensureAuthenticated,(req, res) => {
+    res.render("payment",{
+        user:req.user
+    });
+})
+
 // Admin About Us Page
 router.get("/aboutus",auth_function.ensureAdmin, (req,res)=>{
     res.render("aboutus",{
