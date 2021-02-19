@@ -10,6 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway|Rock+Salt|Source+Code+Pro:300,400,600" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -161,19 +163,19 @@
     </div>
 
     <h2 style="text-align: center ">Other payment options</h2>
-
-    <img src="/images/paytm.jpeg" class="paytm_image" style="width:500px;" alt="Show/Hide Image" id="myImg" />
-    <button type="button" class="btn btn-primary paytm" data-toggle="button" aria-pressed="false" autocomplete="off"
-        id="btn1">
+    <button type="button" data-fancybox="gallery" class="btn btn-primary paytm" href="/images/paytm.jpeg"
+        data-toggle="button" aria-pressed="false" autocomplete="off">
         <div class="left"></div>
         Paytm<div class="right"></div>
     </button>
+
 
     <div id="paypal-button-container"></div>
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js">
     </script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.js"></script>
     <script type="text/javascript" src="/payment/payment.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
