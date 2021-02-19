@@ -1,5 +1,3 @@
-@import "compass/css3";
-
 ul {
   list-style:none;
   font-family:'Trebuchet MS';
@@ -14,12 +12,17 @@ li {
 }
 
 li a {
-  text-decoration:none;
-  color:#333;
-  display:inline-block;
+  display: inline-block;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
   padding:10px;
-  padding-left: 150px;
-  padding-right: 150px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 .sclass{
@@ -37,7 +40,7 @@ li a:hover {
 }
 
 li a:hover ~ span {
- 	 animation:ul 0.3s ease-out;
+ 	 animation:ul 1s ease-out;
    background:#333;
 }
 
