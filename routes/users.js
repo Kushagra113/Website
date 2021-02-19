@@ -204,25 +204,32 @@ router.post("/sign", (req, res) => {
 // Login Handle
 router.post("/login", (req, res, next) => {
     // console.log(req.body.Username);
-    con.query("select admin from account where username=?",[req.body.Username],(error,result)=>{
-        if(error){
-            req.flash("error_msg","Server Error Occured");
+    const {Username , password} = req.body;
+        if(Username=="" || password==""){
+            req.flash("error_msg","Please Fill in All The Fields")
+            res.redirect("/login");
         }
-        else if(result[0].admin==1){
-            passport.authenticate("local", {
-                successRedirect: "/admin/home",
-                failureRedirect: "/login",
-                failureFlash: true
-            })(req, res, next);        
-        }
-        else{
-            passport.authenticate("local", {
-                successRedirect: "/users/home",
-                failureRedirect: "/login",
-                failureFlash: true
-            })(req, res, next);
-        }
-    });
+        else{ 
+        con.query("select admin from account where username=?",[req.body.Username],(error,result)=>{
+            if(error){
+                req.flash("error_msg","Server Error Occured");
+            }
+            else if(result[0].admin==1){
+                passport.authenticate("local", {
+                    successRedirect: "/admin/home",
+                    failureRedirect: "/login",
+                    failureFlash: true
+                })(req, res, next);        
+            }
+            else{
+                passport.authenticate("local", {
+                    successRedirect: "/users/home",
+                    failureRedirect: "/login",
+                    failureFlash: true
+                })(req, res, next);
+            }
+        });
+    }
 })
 
 // Logout Handle
