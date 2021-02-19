@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="/payment.css">
-    <link rel="stylesheet" href="/other_navlink.css">
+    <link rel="stylesheet" href="/payment/payment.css">
+    <link rel="stylesheet" href="/navbar/other_navlink.css">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -21,25 +21,7 @@
 </head>
 
 <body>
-    <ul style="margin-top:0;">
-        <li>
-            <a href="/users/home" style="color:white;">Home</a>
-            <span class="sclass"></span>
-        </li>
-        <li>
-            <a href="/users/payment" style="color:white;">Payment</a>
-            <span class="sclass"></span>
-        </li>
-        <li>
-            <a href="/users/complaint" style="color:white;">Complaint</a>
-            <span class="sclass"></span>
-        </li>
-        <li>
-            <a href="/users/logout" style="color:white;">Logout</a>
-            <span class="sclass"></span>
-        </li>
-    </ul>
-
+    <%- include ("./partials/navbar_repeat"); %>
     <div class="payment-title">
         <h1>Payment Information</h1>
     </div>
@@ -192,7 +174,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js">
     </script>
 
-    <script type="text/javascript" src="/payment.js"></script>
+    <script type="text/javascript" src="/payment/payment.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>

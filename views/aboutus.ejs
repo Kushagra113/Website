@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/aboutus.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Questrial">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=News+Cycle">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Amatic+SC">
@@ -14,34 +13,32 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/aboutus/aboutus.css">
+    <link rel="stylesheet" href="/navbar/other_navlink.css">
 </head>
 
 <body>
 
     <body>
         <header>
+            <%- include ("./partials/navbar_repeat"); %>
+                <!-- /.navbar-collapse -->
 
+                <!-- /.container-fluid -->
+                </nav>
+                <a name="home"></a>
+                <div class="container-fluid">
+                    <div class="more-space row">
+                        <div class="col-md-12">
+                            <div class="text-center intro">
+                                <h1>Hello there,</h1>
 
-
-
-
-            <!-- /.navbar-collapse -->
-
-            <!-- /.container-fluid -->
-            </nav>
-            <a name="home"></a>
-            <div class="container-fluid">
-                <div class="more-space row">
-                    <div class="col-md-12">
-                        <div class="text-center intro">
-                            <h1>Hello there,</h1>
-
-                            <h4 class="red">A creative bunch who love code and design.</h4>
+                                <h4 class="red">A creative bunch who love code and design.</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            </div>
+                </div>
         </header>
 
         <!----ABOUT US---->
@@ -98,7 +95,7 @@
 
                     <div class="col-xs-12 col-sm-4 col-md-4">
                         <div class="thumbnail">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png"
+                            <img src="/images/css_logo_copy.png" height="10%"
                                 class="img-responsive" />
                             <div class="caption">
                                 <h3>CSS</h3>
@@ -241,7 +238,7 @@
 
             </div>
         </footer>
-        <script type="text/javascript" src="/aboutus.js"></script>
+        <script type="text/javascript" src="/aboutus/aboutus.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </body>

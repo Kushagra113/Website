@@ -21,6 +21,14 @@ router.get("/complaint",auth_function.ensureAdmin,(req,res)=>{
     })
 });
 
+// Admin About Us Page
+router.get("/aboutus",auth_function.ensureAdmin, (req,res)=>{
+    res.render("aboutus",{
+        user:req.user
+    });
+})
+
+// Admin Deleting Permissions
 router.delete("/complaint/removecomplaint",auth_function.ensureAdmin,(req,res)=>{
     complaints.removecomplaint(req.body.id,req.body.complaint,(err,result)=>{
         if(err){
@@ -32,6 +40,5 @@ router.delete("/complaint/removecomplaint",auth_function.ensureAdmin,(req,res)=>
         }
     });
 })
-
 
 module.exports=router;

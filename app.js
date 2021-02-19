@@ -57,13 +57,5 @@ app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
 app.use("/admin", require("./routes/admin"));
 
-// Post Requests
-// app.post('/endpoint', function(req, res){
-// 	var obj = {};
-// 	console.log('body: ' + JSON.stringify(req.body));
-// 	res.send(req.body);
-// });
-
-
 // Server Port
 app.listen(3000, () => console.log("Server is running"));

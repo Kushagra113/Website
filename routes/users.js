@@ -16,7 +16,16 @@ router.get("/home",auth_function.ensureAuthenticated ,(req, res) => {
 
 // Payment Page
 router.get("/payment", auth_function.ensureAuthenticated,(req, res) => {
-    res.render("payment");
+    res.render("payment",{
+        user:req.user
+    });
+})
+
+// About Us Page
+router.get("/aboutus",auth_function.ensureAuthenticated,(req,res)=>{
+    res.render("aboutus",{
+        user:req.user
+    });
 })
 
 // Complaint page
@@ -117,8 +126,13 @@ router.post("/complaint",auth_function.ensureAuthenticated,(req,res)=>{
 
 // Post Requests
 router.post("/sign", (req, res) => {
-    const { Username, email, password, password2 } = req.body;
-    let errors = [];
+    const { Username, email, password, password2 ,admin_check} = req.body;
+    let errors = [], admin=0;
+
+    // Setting The Admin Value
+    if(admin_check=="on"){
+        admin=1;
+    }
 
     // Check for All Required Fields
     if (!Username || !email || !password || !password2) {
@@ -169,8 +183,8 @@ router.post("/sign", (req, res) => {
                             } else {
                                 // console.log(password);
                                 password_hashed = hash
-                                sql = "insert into account(username,email,password) values(?,?,?)";
-                                con.query(sql, [Username, email, password_hashed], (err) => {
+                                sql = "insert into account(username,email,password,admin) values(?,?,?,?)";
+                                con.query(sql, [Username, email, password_hashed, admin], (err) => {
                                     if (err) {
                                         throw err;
                                     } else {

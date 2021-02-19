@@ -1,0 +1,26 @@
+<ul style="margin-top: 0">
+    <li>
+      <a style="color: white"
+      <%if(user.admin){%>href='/admin/home'<%}else{%>href='/users/home'<%}%>>Home</a>
+      <span class="sclass"></span>
+    </li>
+    <li>
+      <a style="color: white"
+      <%if(user.admin){%>href='/admin/payment'<%}else{%>href='/users/payment'<%}%>>Payment</a>
+      <span class="sclass"></span>
+    </li>
+    <li>
+      <a style="color: white"
+      <%if(user.admin){%>href='/admin/complaint'<%}else{%>href='/users/complaint'<%}%>>Complaint</a>
+      <span class="sclass"></span>
+    </li>
+    <li>
+      <a style="color: white"
+      <%if(user.admin){%>href='/admin/aboutus'<%}else{%>href='/users/aboutus'<%}%>>About Us</a>
+      <span class="sclass"></span>
+    </li>
+    <li>
+      <a href="/users/logout" style="color: white">Logout</a>
+      <span class="sclass"></span>
+    </li>
+  </ul>
