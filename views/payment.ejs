@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.css" />
     <link rel="stylesheet" href="/payment/payment.css">
     <link rel="stylesheet" href="/navbar/other_navlink.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#btn1').on("click", function (e) {
@@ -136,12 +137,12 @@
     <div class="form-container">
         <div class="field-container">
             <label for="name" style="color:white;">Name</label>
-            <input id="name" maxlength="20" type="text">
+            <input id="name" maxlength="20" type="text" name="name">
         </div>
         <div class="field-container">
             <label for="cardnumber" style="color:white;">Card Number</label><span id="generatecard">generate
                 random</span>
-            <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
+            <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric" name="cardnumber">
             <svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1"
                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -149,16 +150,16 @@
         </div>
         <div class="field-container">
             <label for="expirationdate" style="color:white;">Expiration (mm/yy)</label>
-            <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
+            <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric" name="expirationdate">
         </div>
         <div class="field-container">
             <label for="securitycode" style="color:white;">Security Code</label>
-            <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
+            <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric" name="securitycode">
         </div>
     </div>
     <div class="buttons">
         <div class="container1">
-            <a href="#" class="btn effect01" target="_blank"><span>Pay</span></a>
+            <a class="btn effect01" id="paying_button">Pay</a>
         </div>
     </div>
 
@@ -171,21 +172,23 @@
 
 
     <div id="paypal-button-container"></div>
+    
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.js"></script>
     <script type="text/javascript" src="/payment/payment.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
+    </script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <script src="/jquery_payment.js"></script>
 </body>
 
 </html>

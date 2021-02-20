@@ -1,4 +1,3 @@
-const mysql =  require("mysql");
 const con = require("../config/database");
 
 module.exports.addcomplaint=(name,complaint,user_id,cb)=>{

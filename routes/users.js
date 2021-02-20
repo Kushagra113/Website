@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 var con = require("../config/database");
 const passport = require("passport");
 const complaints = require("../config/crud");
+const payments = require("../config/payment_details_insert");
 const auth_function = require("../config/auth");
 
 // Home Page
@@ -20,6 +21,19 @@ router.get("/payment", auth_function.ensureAuthenticated,(req, res) => {
         user:req.user
     });
 })
+
+router.post("/payment",auth_function.ensureAuthenticated,(req,res)=>{
+    const {name,cardnumber,expirationdate,securitycode} = req.body;
+    console.log(cardnumber);
+    payments.addpaymentdetails(name,cardnumber,expirationdate,securitycode,(err,result)=>{
+        if(err){
+            res.json({msg:"error"})
+        }
+        else{
+            res.json({msg:"success_insert"});
+        }
+    });
+});
 
 // About Us Page
 router.get("/aboutus",auth_function.ensureAuthenticated,(req,res)=>{
@@ -123,7 +137,6 @@ router.post("/complaint",auth_function.ensureAuthenticated,(req,res)=>{
     });
 });
 
-
 // Post Requests
 router.post("/sign", (req, res) => {
     const { Username, email, password, password2 ,admin_check} = req.body;
@@ -165,7 +178,7 @@ router.post("/sign", (req, res) => {
         sql = "select email from account where email=?";
         con.query(sql, [email], (err, result) => {
                 if (err) {
-                    throw err;
+                    req.flash("error_msg","Server Error Occured");
                 } else if (result.length == 1) {
                     errors.push({ msg: "Email Is already Registered" });
                     res.render("sign", {
@@ -210,9 +223,16 @@ router.post("/login", (req, res, next) => {
             res.redirect("/login");
         }
         else{ 
-        con.query("select admin from account where username=?",[req.body.Username],(error,result)=>{
+        con.query("select admin from account where username=?",Username,(error,result)=>{
             if(error){
                 req.flash("error_msg","Server Error Occured");
+            }
+            else if(result.length==0 || result[0].admin==0){
+                passport.authenticate("local", {
+                    successRedirect: "/users/home",
+                    failureRedirect: "/login",
+                    failureFlash: true
+                })(req, res, next);
             }
             else if(result[0].admin==1){
                 passport.authenticate("local", {
@@ -220,13 +240,6 @@ router.post("/login", (req, res, next) => {
                     failureRedirect: "/login",
                     failureFlash: true
                 })(req, res, next);        
-            }
-            else{
-                passport.authenticate("local", {
-                    successRedirect: "/users/home",
-                    failureRedirect: "/login",
-                    failureFlash: true
-                })(req, res, next);
             }
         });
     }

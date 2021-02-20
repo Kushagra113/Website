@@ -22,7 +22,7 @@ router.get("/complaint",auth_function.ensureAdmin,(req,res)=>{
 });
 
 // Admin Payment Page
-router.get("/payment", auth_function.ensureAuthenticated,(req, res) => {
+router.get("/payment", auth_function.ensureAdmin,(req, res) => {
     res.render("payment",{
         user:req.user
     });
