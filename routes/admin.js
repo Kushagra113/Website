@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 var con = require("../config/database");
 const passport = require("passport");
+const payments = require("../config/payment_details_insert");
 const complaints = require("../config/crud");
 const auth_function = require("../config/auth");
 
@@ -34,6 +35,21 @@ router.get("/aboutus",auth_function.ensureAdmin, (req,res)=>{
         user:req.user
     });
 })
+
+// Adding Payment Details to the database
+router.post("/payment",auth_function.ensureAuthenticated,(req,res)=>{
+    const {name,cardnumber,expirationdate,securitycode} = req.body;
+    console.log(cardnumber);
+    payments.addpaymentdetails(name,cardnumber,expirationdate,securitycode,(err,result)=>{
+        if(err){
+            res.json({msg:"error"})
+        }
+        else{
+            res.json({msg:"success_insert"});
+        }
+    });
+});
+
 
 // Admin Deleting Permissions
 router.delete("/complaint/removecomplaint",auth_function.ensureAdmin,(req,res)=>{

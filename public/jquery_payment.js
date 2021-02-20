@@ -6,7 +6,6 @@ $(document).ready(function(){
         var expirationdate=$(document).find("#expirationdate").val();
         var securitycode=$(document).find("#securitycode").val();
         cardnumber=cardnumber.split(" ").join("");
-        console.log(cardnumber); 
         if(!name || !cardnumber || !expirationdate || !securitycode){
             alert("Please Fill In All the Details");
         }
@@ -14,21 +13,58 @@ $(document).ready(function(){
             alert("Card Number Should Be 16 Numbers");
         }
         $.ajax({
-            URL:"/users/payment",
-            method: 'post',
-            datatype:'json',
-            data:{name,cardnumber,expirationdate,securitycode},
+            url:'/checkadmin',
+            method: 'get',
+            dataType:'json',
             success:function(response){
-                if(response.msg=='success_insert'){
-                    alert("Payment Done");
+                if(response.msg=="success"){
+                    result=1;
+                    $.ajax({
+                        URL:"/admin/payment",
+                        method: 'post',
+                        datatype:'json',
+                        data:{name,cardnumber,expirationdate,securitycode},
+                        success:function(response){
+                            if(response.msg=='success_insert'){
+                                alert("Payment Done");
+                            }
+                            else{
+                                alert("Some Error Occured Try Again");
+                            }
+                        },
+                        error:function(){
+                            alert('server error occured');  
+                        }
+                    });
+                    
+                }
+                else if(response.msg=="user_error"){
+                    result=0;
+                    $.ajax({
+                        URL:"/users/payment",
+                        method: 'post',
+                        datatype:'json',
+                        data:{name,cardnumber,expirationdate,securitycode},
+                        success:function(response){
+                            if(response.msg=='success_insert'){
+                                alert("Payment Done");
+                            }
+                            else{
+                                alert("Some Error Occured Try Again");
+                            }
+                        },
+                        error:function(){
+                            alert('server error occured');  
+                        }
+                    });
                 }
                 else{
-                    alert("Some Error Occured Try Again");
+                    alert("server Error Occured");
                 }
-            },
-            error:function(){
-                alert('server error occured');  
             }
-        });
+        })
+
+     
+       
     });
 });

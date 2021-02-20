@@ -22,6 +22,7 @@ router.get("/payment", auth_function.ensureAuthenticated,(req, res) => {
     });
 })
 
+// Adding Payment Details to the database
 router.post("/payment",auth_function.ensureAuthenticated,(req,res)=>{
     const {name,cardnumber,expirationdate,securitycode} = req.body;
     console.log(cardnumber);
