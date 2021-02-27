@@ -59,7 +59,7 @@
                 <div class="collapse navbar-collapse pull-right" id="navbarlist">
                     <div class="navbar-nav">
                         <a class="nav-link active r-link link text-underlined" id='1' aria-current="page"
-                            <%if(user.admin){%>href='/admin/home/alldetails' <%}else{%>href='/users/home' <%}%>>Home</a>
+                            <%if(user.admin){%>href='/admin/home/alldetails' <%}else{%>href='/users/home/alldetails' <%}%>>Home</a>
                         <a class="nav-link r-link link text-underlined" id='4' <%if(user.admin){%>href='/admin/payment'
                             <%}else{%>href='/users/payment' <%}%>>Donate
                         </a>
@@ -96,7 +96,7 @@
     </div>
 
 
-    <%if(payment){%>
+    <%if(locals.payment){%>
         <div class="container-fluid mt-3">
             <h2 class="text-center" id="payment-heading">Payments</h2>
             <div class="mt-3 d-xl-flex justify-content-center">
@@ -125,7 +125,12 @@
                     <%}%>
             </div>
         </div>
-        <%}%>
+    <%} else{%>
+        <!-- Code Goes here If No Payments are there -->
+        <div class="alert alert-primary" role="alert">
+           No Payments Made From The Website
+        </div>
+    <%}%>
             <!-- portfolio-section-ends -->
             <div class="services-section" id="services">
                 <div class="container">

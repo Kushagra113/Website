@@ -9,10 +9,49 @@ const payments = require("../config/payment_details_insert");
 const auth_function = require("../config/auth");
 
 // Home Page
-router.get("/home",auth_function.ensureAuthenticated ,(req, res) => {
-    res.render("home",{
-        user:req.user
-    });
+router.get("/home/alldetails", auth_function.ensureAuthenticated, (req, res) => {
+    payments.alldetails(req.user.username,(err,result)=>{
+        if(err){
+            console.log(err);
+            res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
+        }
+        else{
+            if(result.length>0){
+                res.render("home", {
+                    user: req.user,
+                    payment:result
+                });
+            }
+            else{
+                res.render("home", {
+                    user: req.user
+                });
+            }
+        }
+    })
+})
+
+// Last Month
+router.get("/home/lastmonth",auth_function.ensureAuthenticated,(req,res)=>{
+    payments.lastmonth(req.user.username,(err,result)=>{
+        if(err){
+            console.log(err);
+            res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
+        }
+        else{
+            if(result.length>0){
+                res.render("home", {
+                    user: req.user,
+                    payment:result
+                });
+            }
+            else{
+                res.render("home", {
+                    user: req.user
+                });
+            }
+        }
+    })
 })
 
 // Payment Page
@@ -230,7 +269,7 @@ router.post("/login", (req, res, next) => {
             }
             else if(result.length==0 || result[0].admin==0){
                 passport.authenticate("local", {
-                    successRedirect: "/users/home",
+                    successRedirect: "/users/home/alldetails",
                     failureRedirect: "/login",
                     failureFlash: true
                 })(req, res, next);

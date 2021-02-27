@@ -10,31 +10,45 @@ const auth_function = require("../config/auth");
 
 // Admin Home Page
 router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
-    payments.alldetails(req.user.username,(err,result)=>{
-        if(err){
+    payments.alldetails(req.user.username, (err, result) => {
+        if (err) {
             console.log(err);
             res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
         }
-        else{
-            res.render("home", {
-                user: req.user,
-                payment:result
-            });
+        else {
+            if (result.length > 0) {
+                res.render("home", {
+                    user: req.user,
+                    payment: result
+                });
+            }
+            else {
+                res.render("home", {
+                    user: req.user
+                });
+            }
         }
     })
 })
 
-router.get("/home/lastmonth",auth_function.ensureAdmin,(req,res)=>{
-    payments.lastmonth(req.user.username,(err,result)=>{
-        if(err){
+router.get("/home/lastmonth", auth_function.ensureAdmin, (req, res) => {
+    payments.lastmonth(req.user.username, (err, result) => {
+        if (err) {
             console.log(err);
             res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
         }
-        else{
-            res.render("home", {
-                user: req.user,
-                payment:result
-            });
+        else {
+            if (result.length > 0) {
+                res.render("home", {
+                    user: req.user,
+                    payment: result
+                });
+            }
+            else {
+                res.render("home", {
+                    user: req.user
+                });
+            }
         }
     })
 })
