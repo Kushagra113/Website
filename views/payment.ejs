@@ -9,6 +9,8 @@
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway|Rock+Salt|Source+Code+Pro:300,400,600" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.css" />
     <link rel="stylesheet" href="/payment/payment.css">
     <link rel="stylesheet" href="/navbar/other_navlink.css">
@@ -135,7 +137,7 @@
         </div>
     </div>
     <div class="form-container">
-        <div class="field-container">
+        <div class="field-container" id="name-field">
             <label for="name" style="color:white;">Name</label>
             <input id="name" maxlength="20" type="text" name="name">
         </div>
@@ -156,22 +158,28 @@
             <label for="securitycode" style="color:white;">Security Code</label>
             <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric" name="securitycode">
         </div>
+        <div class="field-container">
+            <label for="amount" style="color:white;">Amount</label>
+            <input id="amount" maxlength="8" pattern="[0-9]*" type="text" name="amount">
+        </div>
     </div>
     <div class="buttons">
         <div class="container1">
             <a class="btn effect01" id="paying_button">Pay</a>
         </div>
     </div>
+   
 
-    <h2 style="text-align: center ">Other payment options</h2>
+    <h2 style="text-align: center"id="other_payment">Other payment options</h2>
     <button type="button" data-fancybox="gallery" class="btn btn-primary paytm" href="/images/paytm.jpeg"
-        data-toggle="button" aria-pressed="false" autocomplete="off">
+        data-toggle="button" aria-pressed="false" autocomplete="off" id="paytm-button">
         <div class="left"></div>
-        Paytm<div class="right"></div>
+        Paytm
+        <div class="right"></div>
     </button>
 
 
-    <div id="paypal-button-container"></div>
+    <div id="paypal-button-container" class=""></div>
     
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js">
@@ -179,16 +187,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.0/jquery.fancybox.min.js"></script>
     <script type="text/javascript" src="/payment/payment.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script> -->
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    <script src="/jquery_payment.js"></script>
+    <script src="/payment/jquery_payment.js"></script>
 </body>
 
 </html>

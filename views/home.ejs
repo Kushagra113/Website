@@ -21,11 +21,11 @@
             window.scrollTo(0, 1);
         }
     </script>
-    <link href="/bootstrap.css" rel='stylesheet' type='text/css' />
-    <link href="/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/home/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/home/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/jquery.min.js"></script>
-    <script type="text/javascript" src="/move-top.js"></script>
+    <script src="/home/jquery.min.js"></script>
+    <script type="text/javascript" src="/home/move-top.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -52,7 +52,7 @@
                 <div class="collapse navbar-collapse pull-right" id="navbarlist">
                     <div class="navbar-nav">
                         <a class="nav-link active r-link link text-underlined" id='1' aria-current="page"
-                            <%if(user.admin){%>href='/admin/home' <%}else{%>href='/users/home' <%}%>>Home</a>
+                        <%if(user.admin){%>href='/admin/home' <%}else{%>href='/users/home' <%}%>>Home</a>
                         <a class="nav-link r-link link text-underlined" id='4'  
                         <%if(user.admin){%>href='/admin/payment' <%}else{%>href='/users/payment' <%}%>>Donate</a>
                         <a class="nav-link r-link link text-underlined" id='4' 
@@ -85,23 +85,8 @@
 
     </div>
 
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span>
-            </h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-            </p>
-        </div>
-        <div class="col-md-5">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-        <title>Placeholder</title>
-        <rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-      </svg>
-
-        </div>
-    </div>
-    <hr class="featurette-divider">
-    <div class="row featurette">
+   
+    <!-- <div class="row featurette">
         <div class="col-md-7 order-md-2" class="no">
             <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
@@ -129,7 +114,7 @@
       </svg>
 
         </div>
-    </div>
+    </div> -->
     <!-- portfolio-section-ends -->
 	<div class="services-section" id="services">
 		<div class="container">

@@ -1,6 +1,7 @@
 body{
   background: rgb(2,0,36);
 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+font-family: 'Baloo Chettan 2', cursive;
 }
 
 .payment-title {
@@ -576,9 +577,25 @@ button::before {
     width: 100px;
 }
 #paypal-button-container{
-    margin-left: 500px !important;
+    margin-left: 75% !important;
+    margin-top: 3% !important;
+    /* margin-bottom: 30% !important; */
     width: 10px;
-    /* position: absolute !important;
-    bottom: 20px; */
     margin-top: 150px;
   }
+
+.creditcard{
+    margin-top: 25%;
+}
+#other_payment{
+    margin-left: 40%;
+    margin-top:-13% !important;
+}
+#paytm-button{
+    margin-left: 26%;
+    margin-top: -25%;
+}
+#paying_button{
+    margin-bottom: -230%;
+    margin-left:-355%;
+}
