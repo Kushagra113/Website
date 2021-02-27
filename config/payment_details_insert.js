@@ -14,17 +14,35 @@ module.exports.addpaymentdetails=(name,cardnumber,expiration_date,securitycode,a
     })
 }
 
-module.exports.test_date=(username,cb)=>{
-    sql=`select date from payments where name=?`;
+module.exports.alldetails=(username,cb)=>{
+    sql=`select name,amount,date from payments where name=?`;
     con.query(sql,username,(err,result)=>{
         if(err){
             console.log(err);
             cb(err,null);
         }
         else{
-            console.log("Date"+result);
-            console.log("Date"+result[0].date);
-            console.log(result[0].date.getMonth());            
+            cb(null,result);           
+        }
+    })
+}
+
+module.exports.lastmonth=(username,cb)=>{
+    sql=`select date from payments where name=? limit 1`;
+    con.query(sql,username,(err,result)=>{
+        if(err){
+            console.log(err);
+            cb(err,null);
+        }
+        else{
+            con.query("select * from payments where name=? and extract(month from date)=?",[username,result[0].date.getMonth()+1],(err,result1)=>{
+                if(err){
+                    cb(err,null);
+                }                
+                else{
+                    cb(null,result1);
+                }
+            })
         }
     })
 }

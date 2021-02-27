@@ -237,7 +237,7 @@ router.post("/login", (req, res, next) => {
             }
             else if(result[0].admin==1){
                 passport.authenticate("local", {
-                    successRedirect: "/admin/home",
+                    successRedirect: "/admin/home/alldetails",
                     failureRedirect: "/login",
                     failureFlash: true
                 })(req, res, next);        

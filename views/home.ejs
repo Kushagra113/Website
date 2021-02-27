@@ -36,6 +36,13 @@
             });
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- <script>
+        function location_lastmonth(){
+            location.href="http://localhost:3000/admin/home/lastmonth";
+        }
+    </script> -->
 </head>
 
 <body>
@@ -52,13 +59,16 @@
                 <div class="collapse navbar-collapse pull-right" id="navbarlist">
                     <div class="navbar-nav">
                         <a class="nav-link active r-link link text-underlined" id='1' aria-current="page"
-                        <%if(user.admin){%>href='/admin/home' <%}else{%>href='/users/home' <%}%>>Home</a>
-                        <a class="nav-link r-link link text-underlined" id='4'  
-                        <%if(user.admin){%>href='/admin/payment' <%}else{%>href='/users/payment' <%}%>>Donate</a>
-                        <a class="nav-link r-link link text-underlined" id='4' 
-                        <%if(user.admin){%>href='/admin/complaint' <%}else{%>href='/users/complaint' <%}%>>Complaint</a>
-                        <a class="nav-link r-link link text-underlined" 
-                        <%if(user.admin){%>href='/admin/aboutus' <%}else{%>href='/users/aboutus' <%}%>>AboutUs</a>
+                            <%if(user.admin){%>href='/admin/home/alldetails' <%}else{%>href='/users/home' <%}%>>Home</a>
+                        <a class="nav-link r-link link text-underlined" id='4' <%if(user.admin){%>href='/admin/payment'
+                            <%}else{%>href='/users/payment' <%}%>>Donate
+                        </a>
+                        <a class="nav-link r-link link text-underlined" id='4'
+                            <%if(user.admin){%>href='/admin/complaint' <%}else{%>href='/users/complaint' <%}%>
+                                    >Complaint</a>
+                        <a class="nav-link r-link link text-underlined" <%if(user.admin){%>href='/admin/aboutus'
+                            <%}else{%>href='/users/aboutus' <%}%>>AboutUs
+                        </a>
                         <a class="nav-link r-link link text-underlined" href="/users/logout">Logout</a>
                     </div>
                 </div>
@@ -85,135 +95,150 @@
 
     </div>
 
-   
-    <!-- <div class="row featurette">
-        <div class="col-md-7 order-md-2" class="no">
-            <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-            </p>
+
+    <%if(payment){%>
+        <div class="container-fluid mt-3">
+            <h2 class="text-center" id="payment-heading">Payments</h2>
+            <div class="mt-3 d-xl-flex justify-content-center">
+                <button type="button" class="btn btn-primary" id="show_payment">Show Latest Month Payment</button>
+                <button type="button" class="btn btn-primary" id="show_all">Show All Payments</button>
+            </div>
+            <div class="row payment-container d-xl-flex flex-row">
+                <% for(var i=0;i<payment.length;i++){%>
+                    <div class="card" style="width: 25rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Payment</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Amount Done By <%=payment[i].name%>
+                            </li>
+                            <li class="list-group-item">Payment of <%=payment[i].amount%> Is Done</li>
+                            <li class="list-group-item">Payment Done On <%=payment[i].date%>
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <a <%if(user.admin){%>href='/admin/payment' <%}else{%>href='/users/payment' <%}%>
+                                        class="card-link">Add Payments</a>
+                        </div>
+                    </div>
+                    <br>
+                    <%}%>
+            </div>
         </div>
-        <div class="col-md-5 order-md-1">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-        <title>Placeholder</title>
-        <rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-      </svg>
+        <%}%>
+            <!-- portfolio-section-ends -->
+            <div class="services-section" id="services">
+                <div class="container">
+                    <div class="services-header">
+                        <h3>services</h3>
+                        <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
+                            Aenean
+                            sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh
+                            id elit.
+                            Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit.
+                            Nam nec
+                            tellus a odio tincidunt auctor a ornare odio. </p>
+                    </div>
+                    <div class="services-sectiongrids">
+                        <div class="col-md-4 services-grid">
+                            <img src="/images/img1.png" alt="" />
+                            <h4>Payment Management</h4>
+                            <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
+                            </p>
+                        </div>
+                        <div class="col-md-4 services-grid">
+                            <img src="/images/img2.png" alt="" />
+                            <h4>Complaint Management</h4>
+                            <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
+                            </p>
+                        </div>
+                        <div class="col-md-4 services-grid">
+                            <img src="/images/img3.png" alt="" />
+                            <h4>web development</h4>
+                            <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="arrow1">
+                            <a href="#contact" class="scroll"><img src="/images/arrow1.png" alt="" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- services-section-ends -->
+            </div>
+            <div class="footer-section" id="contact" id="contact">
+                <div class="container">
+                    <div class="contact-header">
+                        <h3> contact</h3>
+                        <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
+                            Aenean
+                            sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh
+                            id elit.
+                            Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit.
+                            Nam nec
+                            tellus a odio tincidunt auctor a ornare odio. </p>
+                    </div>
 
-        </div>
-    </div>
-    <hr class="featurette-divider">
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-            </p>
-        </div>
-        <div class="col-md-5">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
-        <title>Placeholder</title>
-        <rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-      </svg>
+                    <div class="contact">
+                        <form>
+                            <div class="col-md-4 contactgrid">
+                                <input type="text" class="text" value=" name" onfocus="this.value = '';"
+                                    onblur="if (this.value == '') {this.value = ' name';}">
+                            </div>
+                            <div class="col-md-4 contactgrid">
+                                <input type="text" class="text" value="email" onfocus="this.value = '';"
+                                    onblur="if (this.value == '') {this.value = 'email';}">
+                            </div>
+                            <div class="col-md-4 contactgrid">
+                                <input type="text" class="text" value="phone" onfocus="this.value = '';"
+                                    onblur="if (this.value == '') {this.value = 'phone';}">
+                            </div>
+                            <div class="col-md-8 contactgrid1">
+                                <textarea onfocus="if(this.value == 'Your Message') this.value='';"
+                                    onblur="if(this.value == '') this.value='Your Message';">Your Message</textarea>
+                            </div>
+                            <div class="col-md-4 contactgrid2">
+                                <input type="submit" value="[send message]">
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                    <div class="footer-bottom">
 
-        </div>
-    </div> -->
-    <!-- portfolio-section-ends -->
-	<div class="services-section" id="services">
-		<div class="container">
-			<div class="services-header">
-				<h3>services</h3>
-				<p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean
-					sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.
-					Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec
-					tellus a odio tincidunt auctor a ornare odio. </p>
-			</div>
-			<div class="services-sectiongrids">
-				<div class="col-md-4 services-grid">
-					<img src="/images/img1.png" alt="" />
-					<h4>webdesign</h4>
-					<p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.</p>
-				</div>
-				<div class="col-md-4 services-grid">
-					<img src="/images/img2.png" alt="" />
-					<h4>print design</h4>
-					<p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.</p>
-				</div>
-				<div class="col-md-4 services-grid">
-					<img src="/images/img3.png" alt="" />
-					<h4>web development</h4>
-					<p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.</p>
-				</div>
-				<div class="clearfix"></div>
-				<div class="arrow1">
-					<a href="#contact" class="scroll"><img src="/arrow1.png" alt="" /></a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- services-section-ends -->
-	</div>
-	<div class="footer-section" id="contact" id="contact">
-		<div class="container">
-			<div class="contact-header">
-				<h3> contact</h3>
-				<p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean
-					sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.
-					Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec
-					tellus a odio tincidunt auctor a ornare odio. </p>
-			</div>
+                        <p>&copy; 2021 . All rights Reserved </p>
 
-			<div class="contact">
-				<form>
-					<div class="col-md-4 contactgrid">
-						<input type="text" class="text" value=" name" onfocus="this.value = '';"
-							onblur="if (this.value == '') {this.value = ' name';}">
-					</div>
-					<div class="col-md-4 contactgrid">
-						<input type="text" class="text" value="email" onfocus="this.value = '';"
-							onblur="if (this.value == '') {this.value = 'email';}">
-					</div>
-					<div class="col-md-4 contactgrid">
-						<input type="text" class="text" value="phone" onfocus="this.value = '';"
-							onblur="if (this.value == '') {this.value = 'phone';}">
-					</div>
-					<div class="col-md-8 contactgrid1">
-						<textarea onfocus="if(this.value == 'Your Message') this.value='';"
-							onblur="if(this.value == '') this.value='Your Message';">Your Message</textarea>
-					</div>
-					<div class="col-md-4 contactgrid2">
-						<input type="submit" value="[send message]">
-					</div>
-					<div class="clearfix"></div>
-				</form>
-			</div>
-			<div class="footer-bottom">
+                    </div>
+                    <!-- <script type="text/javascript">
+                        $(document).ready(function () {
+                            /*
+                                    var defaults = {
+                                            containerID: 'toTop', // fading element id
+                                        containerHoverID: 'toTopHover', // fading element hover id
+                                        scrollSpeed: 1200,
+                                        easingType: 'linear' 
+                                        };
+                                    */
 
-				<p>&copy; 2021 . All rights Reserved </p>
+                            $().UItoTop({
+                                easingType: 'easeOutQuart'
+                            });
 
-			</div>
-			<script type="text/javascript">
-				$(document).ready(function () {
-					/*
-							var defaults = {
-					  			containerID: 'toTop', // fading element id
-								containerHoverID: 'toTopHover', // fading element hover id
-								scrollSpeed: 1200,
-								easingType: 'linear' 
-					 		};
-							*/
+                        });
+                    </script> -->
+                    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;">
+                        </span></a>
+                </div>
 
-					$().UItoTop({
-						easingType: 'easeOutQuart'
-					});
+            </div>
+            </div>
 
-				});
-			</script>
-			<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-		</div>
-
-	</div>
-	</div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <script src="/navbar/navbar.js" type="text/javascript"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+                crossorigin="anonymous"></script>
+            <script src="/navbar/navbar.js" type="text/javascript"></script>
+            <script src="/home/jquery_home.js"></script>
+            <!-- window.location.replace('http://localhost:3000/admin/home/lastmonth'); -->
 </body>
 
 </html>

@@ -9,12 +9,35 @@ const complaints = require("../config/crud");
 const auth_function = require("../config/auth");
 
 // Admin Home Page
-router.get("/home", auth_function.ensureAdmin, (req, res) => {
-    res.render("home", {
-        user: req.user
-    });
+router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
+    payments.alldetails(req.user.username,(err,result)=>{
+        if(err){
+            console.log(err);
+            res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
+        }
+        else{
+            res.render("home", {
+                user: req.user,
+                payment:result
+            });
+        }
+    })
 })
 
+router.get("/home/lastmonth",auth_function.ensureAdmin,(req,res)=>{
+    payments.lastmonth(req.user.username,(err,result)=>{
+        if(err){
+            console.log(err);
+            res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
+        }
+        else{
+            res.render("home", {
+                user: req.user,
+                payment:result
+            });
+        }
+    })
+})
 // Admin Complaint Page
 router.get("/complaint", auth_function.ensureAdmin, (req, res) => {
     res.render("complaint", {

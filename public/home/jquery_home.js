@@ -1,0 +1,17 @@
+$(document).ready(function(){
+    $("#show_all").hide();
+    $("#show_payment").click(function(){
+        window.location.replace("http://localhost:3000/admin/home/lastmonth#showlast");
+    });
+    if(window.location.hash==="#showall"){
+        $("#show_all").hide();
+        $("#show_payment").show();
+    }
+    if(window.location.hash==="#showlast"){
+        $("#show_payment").hide();
+        $("#show_all").show();
+    }
+    $("#show_all").click(function(){
+        window.location.replace("http://localhost:3000/admin/home/alldetails#showall");
+    });
+});
