@@ -5,9 +5,9 @@ $(document).ready(function(){
         var expirationdate=$(document).find("#expirationdate").val();
         var securitycode=$(document).find("#securitycode").val();
         var amount=$(document).find("#amount").val();
-        console.log("Amount"+amount);
+        var reason = $(document).find("#reason").val();
         cardnumber=cardnumber.split(" ").join("");
-        if(!name || !cardnumber || !expirationdate || !securitycode || !amount){
+        if(!name || !cardnumber || !expirationdate || !securitycode || !amount || !reason){
             alert("Please Fill In All the Details");
         }
         else if(cardnumber.length != 16){
@@ -25,7 +25,7 @@ $(document).ready(function(){
                             URL:"/admin/payment",
                             method: 'post',
                             datatype:'json',
-                            data:{name,cardnumber,expirationdate,securitycode,amount},
+                            data:{name,cardnumber,expirationdate,securitycode,amount,reason},
                             success:function(response){
                                 if(response.msg=='success_insert'){
                                     alert("Payment Done");
@@ -46,7 +46,7 @@ $(document).ready(function(){
                             URL:"/users/payment",
                             method: 'post',
                             datatype:'json',
-                            data:{name,cardnumber,expirationdate,securitycode,amount},
+                            data:{name,cardnumber,expirationdate,securitycode,amount,reason},
                             success:function(response){
                                 if(response.msg=='success_insert'){
                                     alert("Payment Done");

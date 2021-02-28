@@ -876,6 +876,9 @@ padding-bottom: 2em;
 .btn{
 	font-size: 1.9rem;
 }
+.alert-dismissible .btn-close{
+	top: 5px;
+}
     
        /*-- responsive-mediaquries --*/
 		@media(max-width:1080px){
