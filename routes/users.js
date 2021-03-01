@@ -93,6 +93,7 @@ router.get("/complaint",auth_function.ensureAuthenticated,(req,res)=>{
 router.get("/complaint/getdata",auth_function.ensureAuthenticated,(req,res)=>{
     complaints.getcomplaint((err,result)=>{
         if(err){
+            
             res.json({msg:"error"});
         }
         else{

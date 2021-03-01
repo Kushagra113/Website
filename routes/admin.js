@@ -103,6 +103,17 @@ router.post("/payment", auth_function.ensureAdmin, (req, res) => {
     });
 });
 
+// Printing All The Complaints
+router.get("/complaint/getdata",auth_function.ensureAdmin,(req,res)=>{
+    complaints.getcomplaint((err,result)=>{
+        if(err){
+            res.json({msg:"error"});
+        }
+        else{
+            res.json({msg:"success",data:result});
+        }
+    })
+})
 
 // Admin Deleting Permissions
 router.delete("/complaint/removecomplaint", auth_function.ensureAdmin, (req, res) => {
