@@ -10,7 +10,7 @@ const contact_function = require("../config/contact_details");
 
 // Admin Home Page
 router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
-    payments.alldetails(req.user.username, (err, result) => {
+    payments.alldetails(req.user.id, (err, result) => {
         if (err) {
             console.log(err);
             res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
@@ -32,7 +32,7 @@ router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
 })
 
 router.get("/home/lastmonth", auth_function.ensureAdmin, (req, res) => {
-    payments.lastmonth(req.user.username, (err, result) => {
+    payments.lastmonth(req.user.id, (err, result) => {
         if (err) {
             console.log(err);
             res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
@@ -91,7 +91,8 @@ router.get("/aboutus", auth_function.ensureAdmin, (req, res) => {
 // Adding Payment Details to the database
 router.post("/payment", auth_function.ensureAdmin, (req, res) => {
     const { name, cardnumber, expirationdate, securitycode, amount,reason } = req.body;
-    payments.addpaymentdetails(name, cardnumber, expirationdate, securitycode, amount,reason ,(err, result) => {
+    const id=req.user.id;
+    payments.addpaymentdetails(id,name, cardnumber, expirationdate, securitycode, amount,reason ,(err, result) => {
         if (err) {
             console.log(err);
             res.json({ msg: "error" })

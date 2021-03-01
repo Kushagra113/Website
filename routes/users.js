@@ -10,7 +10,7 @@ const auth_function = require("../config/auth");
 
 // Home Page
 router.get("/home/alldetails", auth_function.ensureAuthenticated, (req, res) => {
-    payments.alldetails(req.user.username,(err,result)=>{
+    payments.alldetails(req.user.id,(err,result)=>{
         if(err){
             console.log(err);
             res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
@@ -33,7 +33,7 @@ router.get("/home/alldetails", auth_function.ensureAuthenticated, (req, res) => 
 
 // Last Month
 router.get("/home/lastmonth",auth_function.ensureAuthenticated,(req,res)=>{
-    payments.lastmonth(req.user.username,(err,result)=>{
+    payments.lastmonth(req.user.id,(err,result)=>{
         if(err){
             console.log(err);
             res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
@@ -63,9 +63,9 @@ router.get("/payment", auth_function.ensureAuthenticated,(req, res) => {
 
 // Adding Payment Details to the database
 router.post("/payment",auth_function.ensureAuthenticated,(req,res)=>{
-    const {name,cardnumber,expirationdate,securitycode} = req.body;
-    console.log(cardnumber);
-    payments.addpaymentdetails(name,cardnumber,expirationdate,securitycode,(err,result)=>{
+    const {name,cardnumber,expirationdate,securitycode,amount,reason} = req.body;
+    const id = req.user.id;
+    payments.addpaymentdetails(id,name,cardnumber,expirationdate,securitycode,amount,reason,(err,result)=>{
         if(err){
             res.json({msg:"error"})
         }
