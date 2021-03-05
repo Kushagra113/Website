@@ -85,6 +85,17 @@ h1{
     background-color: #e0620d;
     color: white;
   }
+  .resolved{
+    background-color: white; 
+    color: black; 
+    border: 2px solid #1fe00d;
+    margin-left: 10px;
+    border-radius: 20px;
+  }
+  .resolved:hover{
+    background-color: #1fe00d;
+    color: white;
+  }
   /* demo styles */
   
   @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
