@@ -131,6 +131,7 @@ router.post("/complaint/editcomplaint",auth_function.ensureAuthenticated,(req,re
                 res.json({msg:"error"});
             }
             else if(result.length>0){    
+                console.log(result[0]);
                 res.json({msg:"same_complaint"});
             }
             else{

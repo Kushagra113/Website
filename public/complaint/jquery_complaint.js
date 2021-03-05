@@ -106,10 +106,15 @@ $(document).ready(function(){
         })
     }); 
     $(document).on('click','button.edit',function(e){
+        var request_sent=false;
         if($(".edit_block").is(":visible")){
             alert("First Edit the Following Complaint");
         }
+        else if(request_sent){
+            alert("True");
+        }
         else{
+            request_sent=true;
             var id = $(this).parent().find('button.edit').val();
             complaint=($(this).parent().parent().find(".complaint_text").html());
             $(".edit_block").show();
@@ -134,7 +139,7 @@ $(document).ready(function(){
                                     alert("You Cannot Edit Other Users Complaints Sorry!");
                                 }
                                 else if(response.msg=="same_complaint"){
-                                    alert("Complaint Already Added")
+                                    alert("Complaint Already Added");
                                 }
                                 else{  
                                     alert('Editing was not Successfull Please Try Again');  
@@ -147,6 +152,7 @@ $(document).ready(function(){
                         $(".edit_block").hide();
                 }
             });
+            request_sent=false;
         }
         // }
     }); 
@@ -221,6 +227,6 @@ $(document).ready(function(){
         })
     }
     $("#hide_edit").click(function(){
-        $(document).find(".edit_block").hide();
+        window.location.replace("http://localhost:3000/users/complaint");
     })
 });
