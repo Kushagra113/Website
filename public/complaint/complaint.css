@@ -22,13 +22,13 @@ table tbody td{
     display: none;
 }
 .row{
-  width: 37%;
+    width: 50%;
     margin-left: 400px;
     text-align: center;
 }
 .row button{
-  height: 20%;
-width: 50%;
+  height: 100%;
+  width: 30%;
 }
 h1{
     font-size: 30px;
@@ -155,7 +155,7 @@ h1{
   }
   
   .form__field {
-    width: 360px !important;
+    width: 70% !important;
     height: 47px;
     background: #fff;
     color: #a3a3a3;

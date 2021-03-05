@@ -16,54 +16,41 @@
 
 <body>
   <%- include ("./partials/navbar_repeat"); %>
-  <div class="container" style="margin-top: 50px">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Complaint</th>
-          <th>Edit/Delete</th>
-        </tr>
-      </thead>
-      <div class="tbl-content">
-        <tbody></tbody>
-      </div>
-    </table>
-  </div>
-  <div <%if(user.admin){%> class='row mt-3' style='display:none' <%}else{%> class='row mt-3' <%}%>>
-
-      <input
-        type="email"
-        class="form__field"
-        placeholder="Complaint"
-        id="complaint_text"
-      />
-      <button id="add" type="button" class="btn btn--primary btn--inside uppercase">
-        Add Complaint
-      </button>
-      <!-- <label for="complaint_text">Complaint</label> -->
-      <!-- <input type="text" id="complaint_text" style="margin-bottom: 30px" /> -->
-      <!-- <button id="add">Add Complaint</button> -->
-      <div class="edit_block">
-        <input
-        type="email"
-        class="form__field"
-        placeholder="Complaint"
-        id="complaint_text"
-      />
-      <button id="add" type="button" class="btn btn--primary btn--inside uppercase">
-        Add Complaint
-      </button>
-        <label for="edit_complaint">Edit The Complaint</label>
-        <input type="text" name="edit_complaint" id="edit_complaint" />
-        <button id="done">Done</button>
-      </div>
+    <div class="container" style="margin-top: 50px">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Complaint</th>
+            <th>Edit/Delete</th>
+          </tr>
+        </thead>
+        <div class="tbl-content">
+          <tbody></tbody>
+        </div>
+      </table>
     </div>
+    <div <%if(user.admin){%> class='row mt-3' style='display:none' <%}else{%> class='row mt-3' <%}%>>
+          <div id="c" class="mb-3 mt-3">
+            <input type="text" class="form__field" placeholder="Complaint" id="complaint_text" />
+            <button id="add" type="button" class="btn btn--primary btn--inside uppercase">
+              Add Complaint
+            </button>
+          </div>
+          <div id="e" class="mt-3">
+            <div class="edit_block">
+              <input type="text" class="form__field" placeholder="Complaint" id="edit_complaint" />
+              <button id="done" type="button" class="btn btn--primary btn--inside uppercase">
+                Edit Complaint
+              </button>
+              <button id="hide_edit" type="button" class="btn btn--primary btn--inside uppercase mt-4" style="width: 80%; margin-left: 1%;">
+                If you dont want to Edit The Complaint Click Here to Hide the Edit Box
+              </button>
+            </div>
+          </div>
 
     <script src="/complaint/complaint.js"></script>
-    <script
-      src="/complaint/jquery_complaint.js"
-      type="text/javascript"
-    ></script>
-  </body>
+    <script src="/complaint/jquery_complaint.js" type="text/javascript"></script>
+</body>
+
 </html>

@@ -580,7 +580,7 @@ button::before {
 }
 #paypal-button-container{
     margin-left: 75% !important;
-    margin-top: 3% !important;
+    margin-top: -2.5% !important;
     /* margin-bottom: 30% !important; */
     width: 10px;
     margin-top: 150px;
@@ -591,13 +591,13 @@ button::before {
 }
 #other_payment{
     margin-left: 40%;
-    margin-top:-13% !important;
+    margin-top:-17% !important;
 }
 #paytm-button{
     margin-left: 26%;
-    margin-top: -25%;
+    margin-top: -34%;
 }
 #paying_button{
-    margin-bottom: -300%;
-    margin-left: -500%;
+    margin-bottom: -290%;
+    margin-left: -30%;
 }
