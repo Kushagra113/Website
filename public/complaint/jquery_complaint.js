@@ -1,8 +1,6 @@
 $(document).ready(function(){
-    
-    // checkAdmin();
-    // get Data	
-    getData();
+  
+    getData(); 
     
     $("#add").click(function(){
         // var name=$("#name").val();
@@ -21,6 +19,7 @@ $(document).ready(function(){
                     if(response.msg=='success'){
                         // alert("Name Added In the Database");
                         getData();
+                        
                     }
                     else if(response.msg=="same_complaint"){
                         alert("Complaint Already Added")
@@ -55,7 +54,7 @@ $(document).ready(function(){
                         success:function(response){  
                             if(response.msg=='success'){  
                                 alert('data deleted');  
-                                getData(); 
+                                getData();
                             }
                             else if(response.msg=="user_error"){
                                 alert("You Cannot Delete Other Users Complaints Sorry!");
@@ -83,6 +82,7 @@ $(document).ready(function(){
                             if(response.msg=='success'){  
                                 alert('data deleted');  
                                 getData();
+                                
                             }
                             else if(response.msg=="user_error"){
                                 alert("You Cannot Delete Other Users Complaints Sorry!");
@@ -133,7 +133,8 @@ $(document).ready(function(){
                                 if(response.msg=='success'){  
                                     console.log("Msg"+response.msg);
                                     alert('data successfully Edited');  
-                                    getData();  
+                                    getData();
+                                      
                                 }
                                 else if(response.msg=="user_error"){
                                     alert("You Cannot Edit Other Users Complaints Sorry!");
@@ -156,6 +157,43 @@ $(document).ready(function(){
         }
         // }
     }); 
+    $(document).on('click','button.resolved',function(e){
+        if($(this).parent().find(".trow").is(":visible")){
+            var id = $(this).val()
+            var complaint_text = $(this).parent().parent().find(".complaint_text").html();
+            $(this).parent().parent().css("background-color","");
+            $(this).parent().find(".trow").remove();
+            $.ajax({
+                url:"/admin/removeresolve",
+                method:"POST",
+                dataType:"JSON",
+                data:{"id":id,complaint:complaint_text},
+                success:function(){
+                },
+                error:function(){
+                    alert("Server Error");
+                }
+            })
+        }
+        else{
+            $(this).parent().parent().css("background-color","lightgreen");
+            $(this).after("<span class='trow'></span>");
+            var id = $(this).val();
+            var complaint=[];
+            complaint.push($(this).parent().parent().find(".complaint_text").html());
+            $.ajax({
+                url:"/admin/sendresolve",
+                method:"POST",
+                dataType:"JSON",
+                data:{"id":id,complaint:complaint[0],resolved:1},
+                success:function(response){
+                },
+                error:function(){
+                    alert("Server Error");  
+                }
+            })
+        }
+    })
     function getData(){
         $.ajax({
             url:'/checkadmin',
@@ -179,7 +217,8 @@ $(document).ready(function(){
                                         index+=1;  
                                     $('tbody').append("<tr class='taskrow'><td class='name'>"+ data.name +"</td><td class='complaint_text'>"+data.complaint+"</td><td>"+"<button class='edit' value='"+data.id+"'>Edit</button>"+"<button class='del'  value='"+data.id+"'>Delete</button>"+"<button class='resolved' value='"+data.id+"'>Resolved</button>"+"</td></tr>");   
                                     });  
-                                    $(document).find(".edit").hide();                  
+                                    $(document).find(".edit").hide();  
+                                    getresolve();             
                                 }
                             }
                             else{
@@ -226,6 +265,28 @@ $(document).ready(function(){
             }
         })
     }
+    function getresolve(){
+        $.ajax({
+            url:"/admin/getresolve",
+            method:"GET",
+            dataType:"JSON",
+            success:function(response){
+                response.data.forEach(row => { 
+                    $("tr.taskrow").each(function(){
+                        var button_id=$(this).find("button.resolved").val()
+                        var complaint_text = $(this).find(".complaint_text").html();
+                        if(row.id==button_id && row.complaint==complaint_text){
+                            $(this).css("background-color","lightgreen");
+                            $(this).find("button.resolved").after("<span class='trow'></span>");
+                        }
+                    })  
+                });
+            }
+        })
+         
+    }
+
+
     $("#hide_edit").click(function(){
         window.location.replace("http://localhost:3000/users/complaint");
     })

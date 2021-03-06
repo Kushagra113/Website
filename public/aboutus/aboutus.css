@@ -306,7 +306,13 @@ header {
     color: white;
     padding-top: 37%;
   }
-  
+  ul{
+    padding:0px;
+  }
+  li a{
+    padding-left: 87px;
+    padding-right: 87px;
+  }
   @media screen and (max-width: 500px) {
     header h1, .about-us h1, .works h1, .contact h1 {
       font-size: 50px;

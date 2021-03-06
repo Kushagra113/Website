@@ -7,6 +7,7 @@ const payments = require("../config/payment_details_insert");
 const complaints = require("../config/crud");
 const auth_function = require("../config/auth");
 const contact_function = require("../config/contact_details");
+const { route } = require("./users");
 
 // Admin Home Page
 router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
@@ -125,6 +126,48 @@ router.delete("/complaint/removecomplaint", auth_function.ensureAdmin, (req, res
         else {
             res.json({ msg: "success" });
         }
+    });
+})
+
+router.post("/sendresolve",(req,res)=>{
+    const {id, complaint,resolved} = req.body;
+    complaints.setresolve(id,complaint,resolved,(err,result)=>
+    {
+        if(err){
+            res.json({msg:"error"});
+        }
+        else{
+            res.json({msg:"success",data:result})
+        }
+    })
+})
+
+router.get("/getresolve",(req,res)=>{
+    complaints.getresolve((err,result)=>{
+        if(err){
+            res.json({msg:"error"})
+        }
+        else{
+            res.json({msg:"success",data:result});
+        }
+    })
+})
+
+router.post("/removeresolve",(req,res)=>{
+    const {id,complaint}= req.body
+    complaints.removeresolve(id,complaint,(err,result)=>{
+        if(err){
+            res.json({msg:"error"});
+        }
+        else{
+            res.json({msg:"success"});
+        }
+    })
+})
+
+router.get("/members",auth_function.ensureAdmin,(req,res)=>{
+    res.render("members",{
+        user:req.user
     });
 })
 

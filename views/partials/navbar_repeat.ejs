@@ -12,6 +12,10 @@
       <span class="sclass"></span>
     </li>
     <li>
+      <a <%if(user.admin){%>href='/admin/members'<%}else{%>href='/users/members'<%}%>>Members</a>
+      <span class="sclass"></span>
+    </li>
+    <li>
       <a <%if(user.admin){%>href='/admin/aboutus'<%}else{%>href='/users/aboutus'<%}%>>About Us</a>
       <span class="sclass"></span>
     </li>

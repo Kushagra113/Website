@@ -176,3 +176,8 @@ h1{
     outline: 0;
     padding: 22px 18px;
   }
+  .trow::after{
+   margin-left: 20px;
+   content: '\2714';
+   color:green;
+  }

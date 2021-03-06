@@ -879,7 +879,13 @@ padding-bottom: 2em;
 .alert-dismissible .btn-close{
 	top: 5px;
 }
-    
+.navbar-brand{
+	margin-left: 0px;
+	padding: 0px;
+}
+#home-nav{
+height: 100px;
+}
        /*-- responsive-mediaquries --*/
 		@media(max-width:1080px){
 			.grid_box a:hover .zoom-icon {

@@ -6,25 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/navbar/other_navlink.css">
     <link rel="stylesheet" href="/members/members.css">
-    <script src="/members/members.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 
 <body>
-
+    <%- include ("./partials/navbar_repeat"); %>
     <h1>
-        Providers
+        Members Of The Society
     </h1>
-    <p>
-        (An example table + detail view scenario)
-    </p>
     <main>
         <table>
             <thead>
                 <tr>
                     <th>
-                        Provider Name
+                        Committee Members Of The Society
                     </th>
                     <th>
                         E-mail
@@ -35,7 +32,7 @@
             <tfoot>
                 <tr>
                     <th colspan='3'>
-                        Year: 2014
+                        Year: 2021
                     </th>
                 </tr>
             </tfoot>
@@ -43,45 +40,6 @@
                 <tr>
                     <td data-title='Provider Name'>
                         Iacob Geaorgescu
-                    </td>
-                    <td data-title='E-mail'>
-                        e-mail@test-email.com
-                    </td>
-                    <td class='select'>
-                        <a class='button' href='#'>
-                            Select
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-title='Provider Name'>
-                        Julius Neumann
-                    </td>
-                    <td data-title='E-mail'>
-                        e-mail@test-email.com
-                    </td>
-                    <td class='select'>
-                        <a class='button' href='#'>
-                            Select
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-title='Provider Name'>
-                        Christoph Koller
-                    </td>
-                    <td data-title='E-mail'>
-                        e-mail@test-email.com
-                    </td>
-                    <td class='select'>
-                        <a class='button' href='#'>
-                            Select
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-title='Provider Name'>
-                        Bram Lemmens
                     </td>
                     <td data-title='E-mail'>
                         e-mail@test-email.com
@@ -144,7 +102,7 @@
             </div>
         </div>
     </main>
-    <script src="script.js"></script>
+    <script src="/members/members.js"></script>
 </body>
 
 </html>

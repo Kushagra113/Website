@@ -1,6 +1,12 @@
 const con = require("../config/database");
+const bcrypt = require("bcryptjs");
 
 module.exports.addpaymentdetails=(id,name,cardnumber,expiration_date,securitycode,amount,reason,cb)=>{
+    bcrypt.genSalt(5,(err,salt)=>{
+        bcrypt.hash(cardnumber,expiration_date,securitycode,salt,(err,hash)=>{
+            
+        })
+    })
     con.query("create table if not exists payments(id int(5),name varchar(20),cardnumber varchar(17),expiration_date varchar(6),securitycode int(4),amount int(8),reason_for_payment varchar(20),date DATETIME DEFAULT CURRENT_TIMESTAMP);");
     sql=`INSERT INTO payments(id,name,cardnumber,expiration_date,securitycode,amount,reason_for_payment) VALUES(?,?,?,?,?,?,?)`;
     con.query(sql,[id,name,cardnumber,expiration_date,securitycode,amount,reason],(err,result)=>{

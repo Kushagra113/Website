@@ -1,7 +1,7 @@
 const con = require("../config/database");
 
 module.exports.addcomplaint=(name,complaint,user_id,cb)=>{
-    sql=`INSERT INTO complaints VALUES(?,?,?)`;
+    sql=`INSERT INTO complaints (id,name,complaint) VALUES(?,?,?)`;
     con.query(sql,[user_id,name,complaint],(err,result)=>{
         if(err){
             console.log(err);
@@ -64,4 +64,42 @@ module.exports.editcomplaint=(id,complaint,newComplaint,cb)=>{
             cb(null,result);
         }
     });
+}
+
+module.exports.setresolve=(id,complaint,resolved,cb)=>{
+    // sql="select resolved from complaints where id=? and complaint=?";
+    sql="update complaints set resolved=? where id=? and complaint=?"
+    con.query(sql,[resolved,id,complaint],(err,result)=>{
+        if(err){
+            console.log(err);
+            cb(err,null);
+        }
+        else{
+            cb(null,result);
+        }
+    })
+}
+
+module.exports.getresolve=(cb)=>{
+    con.query("select id,complaint from complaints where resolved=?",1,(error,result)=>{
+        if(error){
+            console.log(error);
+            cb(error,null);
+        }
+        else{
+            cb(null,result)
+        }
+    })
+}
+
+module.exports.removeresolve=(id,complaint,cb)=>{
+    con.query("update complaints set resolved=? where id=? and complaint=?",[0,id,complaint],(error,result)=>{
+        if(error){
+            console.log(error);
+            cb(error,null);
+        }
+        else{
+            cb(null,result)
+        }
+    })
 }

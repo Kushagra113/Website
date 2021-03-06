@@ -8,12 +8,10 @@
   }
   
   html {
-    padding: 40px;
     font-size: 62.5%;
   }
   
   body {
-    padding: 20px;
     background-color: #5BB9B8;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -176,7 +174,12 @@
     background-color: #a82545;
     border: 1px solid #a82545;
   }
-  
+  ul{
+    padding:0px;
+  }
+  h1{
+    margin-top: 100px;
+  }
   @media (min-width: 460px) {
     td {
       text-align: left;

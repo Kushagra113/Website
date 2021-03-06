@@ -179,6 +179,14 @@ router.post("/complaint",auth_function.ensureAuthenticated,(req,res)=>{
     });
 });
 
+router.get("/members",auth_function.ensureAuthenticated,(req,res)=>{
+    res.render("members",{
+        user:req.user
+    });
+})
+
+
+
 // Post Requests
 router.post("/sign", (req, res) => {
     const { Username, email, password, password2 ,admin_check} = req.body;
