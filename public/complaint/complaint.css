@@ -181,3 +181,11 @@ h1{
    content: '\2714';
    color:green;
   }
+  
+  li a{
+    padding-left: 87px;
+    padding-right: 87px;
+  }
+  ul{
+    padding:0px;
+  }

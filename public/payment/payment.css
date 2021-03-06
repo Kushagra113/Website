@@ -601,3 +601,11 @@ button::before {
     margin-bottom: -290%;
     margin-left: -30%;
 }
+
+li a{
+    padding-left: 87px;
+    padding-right: 87px;
+  }
+  ul{
+    padding:0px;
+  }
