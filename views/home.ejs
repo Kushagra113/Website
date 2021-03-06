@@ -59,14 +59,15 @@
                 <div class="collapse navbar-collapse pull-right" id="navbarlist">
                     <div class="navbar-nav">
                         <a class="nav-link active r-link link text-underlined" id='1' aria-current="page"
-                            <%if(user.admin){%>href='/admin/home/alldetails' <%}else{%>href='/users/home/alldetails'
-                                <%}%>>Home</a>
+                            <%if(user.admin){%>href='/admin/home/alldetails' <%}else{%>href='/users/home/alldetails' <%}%>>Home</a>
                         <a class="nav-link r-link link text-underlined" id='4' <%if(user.admin){%>href='/admin/payment'
-                            <%}else{%>href='/users/payment' <%}%>>Donate
+                            <%}else{%>href='/users/payment' <%}%>>Payment
                         </a>
                         <a class="nav-link r-link link text-underlined" id='4'
                             <%if(user.admin){%>href='/admin/complaint' <%}else{%>href='/users/complaint' <%}%>
                                     >Complaint</a>
+                                    <a class="nav-link active r-link link text-underlined" id='1' aria-current="page"
+                                    <%if(user.admin){%>href='/admin/members' <%}else{%>href='/users/members' <%}%>>Members</a>
                         <a class="nav-link r-link link text-underlined" <%if(user.admin){%>href='/admin/aboutus'
                             <%}else{%>href='/users/aboutus' <%}%>>AboutUs
                         </a>
@@ -97,43 +98,40 @@
     </div>
 
 
-    <%if(locals.payment){%>
-        <div class="container-fluid mt-3">
-            <h2 class="text-center" id="payment-heading">Payments</h2>
-            <div class="mt-3 d-xl-flex justify-content-center">
-                <button type="button" class="btn btn-primary" id="show_payment">Show Latest Month Payment</button>
-                <button type="button" class="btn btn-primary" id="show_all">Show All Payments</button>
-            </div>
-            <div class="row payment-container d-xl-flex flex-row">
-                <% for(var i=0;i<payment.length;i++){%>
-                    <div class="card" style="width: 30rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Payment</h5>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Amount Done By <%=payment[i].name%>
-                            </li>
-                            <li class="list-group-item">Payment of <%=payment[i].amount%> Is Done</li>
-                            <li class="list-group-item">Payment Done On <%=payment[i].date%>
-                            </li>
-                            <li class="list-group-item">Payment Done For Reason: <%=payment[i].reason_for_payment%>
-                            </li>
-                        </ul>
-                        <div class="card-body">
-                            <a <%if(user.admin){%>href='/admin/payment' <%}else{%>href='/users/payment' <%}%>
+    <%if(locals.payment){%> <div class="container-fluid mt-3">
+                            <h2 class="text-center" id="payment-heading">Payments</h2>
+                            <div class="mt-3 d-xl-flex justify-content-center">
+                                <button type="button" class="btn btn-primary" id="show_payment">Show Latest Month
+                                    Payment</button>
+                                <button type="button" class="btn btn-primary" id="show_all">Show All Payments</button>
+                            </div>
+                            <div class="row payment-container d-xl-flex flex-row">
+                                <% for(var i=0;i<payment.length;i++){%>
+                                <div class="card" style="width: 30rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Payment</h5>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Amount Done By <%=payment[i].name%>
+                                        </li>
+                                        <li class="list-group-item">Payment of <%=payment[i].amount%> Is Done</li>
+                                        <li class="list-group-item">Payment Done On <%=payment[i].date%>
+                                        </li>
+                                        <li class="list-group-item">Payment Done For Reason:
+                                            <%=payment[i].reason_for_payment%>
+                                        </li>
+                                    </ul>
+                                    <div class="card-body">
+                                        <a <%if(user.admin){%>href='/admin/payment' <%}else{%>href='/users/payment' <%}%>
                                         class="card-link">Add Payments</a>
                         </div>
                     </div>
                     <br>
-                    <%}%>
-            </div>
-        </div>
-        <%} else{%>
-            <!-- Code Goes here If No Payments are there -->
-            <div class="alert alert-primary" role="alert">
-                No Payments Made From The Website
-            </div>
-            <%}%>
+                    <%}%> </div> </div> <%} else{%> <!-- Code Goes here If No Payments are there -->
+                                            <div class="alert alert-primary" role="alert">
+                                                No Payments Made From The Website
+                                            </div>
+                                            <%}%>
                 <!-- portfolio-section-ends -->
                 <div class="services-section" id="services">
                     <div class="container">

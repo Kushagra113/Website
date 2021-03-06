@@ -265,7 +265,8 @@ h1 {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+select[type="text"] {
     font-size: 0.9em;
     color: #fff;
     font-weight: 100;
@@ -881,4 +882,7 @@ input.checkbox:checked:after {
     .main-w3layouts {
         padding: 1em 0 0;
     }
+}
+option{
+    color: black;
 }
