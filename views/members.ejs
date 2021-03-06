@@ -8,7 +8,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="/navbar/other_navlink.css">
     <link rel="stylesheet" href="/members/members.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
@@ -21,62 +22,74 @@
             <thead>
                 <tr>
                     <th>
-                        Committee Members Of The Society
+                         Members Of The Society
                     </th>
                     <th>
                         E-mail
+                    </th>
+                    <th>
+                        Is a Committee Member
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th colspan='3'>
+                    <th colspan='4'>
                         Year: 2021
                     </th>
                 </tr>
             </tfoot>
             <tbody>
+                <% for(var i=0;i<result.length;i++){%>
                 <tr>
-                    <td data-title='Provider Name'>
-                        Iacob Geaorgescu
+                    <td class="w user" value=<%= result[i].id %>>
+                    <%=result[i].username%>
                     </td>
-                    <td data-title='E-mail'>
-                        e-mail@test-email.com
+                    <td class="w mail" value=<%= result[i].id %>>
+                    <%=result[i].email%>
                     </td>
-                    <td class='select'>
-                        <a class='button' href='#'>
+                    <td class="w admin" value=<%= result[i].id %>>
+                    <%if(result[i].admin){%>
+                        Yes
+                    <%}else{%>
+                        No
+                    <%}%>
+                    </td>
+                    <td class='select' value=<%= result[i].id %>>
+                        <a class='button' href='#' style="font-size: 1.7rem;">
                             Select
                         </a>
                     </td>
                 </tr>
+                <%}%>
             </tbody>
         </table>
         <div class='detail'>
             <div class='detail-container'>
                 <dl>
                     <dt>
-                        Provider Name
+                        Member Name
                     </dt>
-                    <dd>
-                        John Doe
+                    <dd id="name">
+
                     </dd>
                     <dt>
                         E-mail
                     </dt>
-                    <dd>
-                        email@example.com
+                    <dd id="mail">
+                        
                     </dd>
                     <dt>
-                        City
+                        Flat No
                     </dt>
-                    <dd>
-                        Detroit
+                    <dd id="flat">
+                       
                     </dd>
                     <dt>
                         Phone-Number
                     </dt>
-                    <dd>
+                    <dd id="phone">
                         555-555-5555
                     </dd>
                     <dt>
@@ -103,6 +116,9 @@
         </div>
     </main>
     <script src="/members/members.js"></script>
+  
+    <script src="/members/jquery_members.js"></script>
+   
 </body>
 
 </html>

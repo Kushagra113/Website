@@ -7,6 +7,7 @@ const passport = require("passport");
 const complaints = require("../config/crud");
 const payments = require("../config/payment_details_insert");
 const auth_function = require("../config/auth");
+const getalldata = require("../config/getalldata");
 
 // Home Page
 router.get("/home/alldetails", auth_function.ensureAuthenticated, (req, res) => {
@@ -180,25 +181,45 @@ router.post("/complaint",auth_function.ensureAuthenticated,(req,res)=>{
 });
 
 router.get("/members",auth_function.ensureAuthenticated,(req,res)=>{
-    res.render("members",{
-        user:req.user
-    });
+    getalldata.getdata((err,result)=>{
+        if(err){
+            throw err;
+        }
+        else{
+            res.render("members",{
+                user:req.user,
+                result:result
+            });
+        }
+    })
+})
+
+router.post("/getiddata",auth_function.ensureAuthenticated,(req,res)=>{
+    const id = req.body.id;
+    getalldata.getiddata(id,(err,result)=>{
+        if(err){
+            res.json({msg:"error"});
+        }
+        else{
+            res.json({msg:"success",data:result});
+        }
+    })
 })
 
 
 
 // Post Requests
 router.post("/sign", (req, res) => {
-    const { Username, email, password, password2 ,admin_check} = req.body;
+    const { Username, PhoneNo, FlatNo, Gender, email, password, password2 ,admin_check} = req.body;
     let errors = [], admin=0;
-
+    console.log(PhoneNo+FlatNo+Gender);
     // Setting The Admin Value
     if(admin_check=="on"){
         admin=1;
     }
 
     // Check for All Required Fields
-    if (!Username || !email || !password || !password2) {
+    if (!Username || !PhoneNo || !FlatNo || !Gender || !email || !password || !password2) {
         errors.push({ msg: "Please Fill In All Fields" });
     }
 
@@ -210,6 +231,14 @@ router.post("/sign", (req, res) => {
     // Passwords are atleast 6 characters Long
     if (password.length < 6) {
         errors.push({ msg: "Password Should be ateast 6 Characters" });
+    }
+
+    if(PhoneNo.length!=10){
+        errors.push({msg: "Phone Number should be 10 Digits"})
+    }
+
+    if(FlatNo.length>4){
+        errors.push({msg: "Invalid Flat No Please Enter Again"})
     }
 
     // Check if there are errors
@@ -227,40 +256,58 @@ router.post("/sign", (req, res) => {
     else {
         sql = "select email from account where email=?";
         con.query(sql, [email], (err, result) => {
-                if (err) {
-                    req.flash("error_msg","Server Error Occured");
-                } else if (result.length == 1) {
-                    errors.push({ msg: "Email Is already Registered" });
-                    res.render("sign", {
-                        errors,
-                        Username,
-                        email,
-                        password,
-                        password2
-                    })
-                } else {
-                    bcrypt.genSalt(10, (err, salt) => {
-                        bcrypt.hash(password, salt, (err, hash) => {
-                            if (err) {
-                                throw err;
-                            } else {
-                                // console.log(password);
-                                password_hashed = hash
-                                sql = "insert into account(username,email,password,admin) values(?,?,?,?)";
-                                con.query(sql, [Username, email, password_hashed, admin], (err) => {
-                                    if (err) {
-                                        throw err;
-                                    } else {
-                                        req.flash("success_msg", "You are successfully Registered and now can Log in");
-                                        res.redirect("/login");
-                                    }
-                                })
-                            } // Inner Query Callback Function
-
+            if (err) {
+                req.flash("error_msg","Server Error Occured");
+            } 
+            else if (result.length == 1) {
+                errors.push({ msg: "Email Is already Registered" });
+                res.render("sign", {
+                    errors,
+                    Username,
+                    email,
+                    password,
+                    password2
+                })
+            }
+            else{
+                con.query("select Phone_no from account where Phone_no=?",PhoneNo,(err,result)=>{  
+                    if (err) {
+                        req.flash("error_msg","Server Error Occured");
+                    }
+                    else if (result.length == 1) {
+                        errors.push({ msg: "Phone Number Is already In Use" });
+                        res.render("sign", {
+                            errors,
+                            Username,
+                            email,
+                            password,
+                            password2
                         })
-                    })
-                } // Else part 
-            }) // Callback Function Of Query
+                    } else {
+                        bcrypt.genSalt(10, (err, salt) => {
+                            bcrypt.hash(password, salt, (err, hash) => {
+                                if (err) {
+                                    throw err;
+                                } else {
+                                    // console.log(password);
+                                    password_hashed = hash
+                                    sql = "insert into account(username,email,password,admin,Phone_no,Flat_no,Gender) values(?,?,?,?,?,?,?)";
+                                    con.query(sql, [Username, email, password_hashed, admin, PhoneNo, FlatNo, Gender], (err) => {
+                                        if (err) {
+                                            throw err;
+                                        } else {
+                                            req.flash("success_msg", "You are successfully Registered and now can Log in");
+                                            res.redirect("/login");
+                                        }
+                                    })
+                                } // Inner Query Callback Function
+
+                            })
+                        })
+                    } // Else part 
+                })
+            }
+        }) // Callback Function Of Query
     }
 })
 

@@ -1,4 +1,4 @@
-$('.button, .close').on('click', function(e) {
+$(document).find('.button, .close').on('click', function (e) {
     e.preventDefault();
-    $('.detail, html, body').toggleClass('open');
-  });
+    $(document).find('.detail, html, body').toggleClass('open');
+});

@@ -62,6 +62,12 @@
     padding-right: 10px;
     display: block;
   }
+  .w{
+    width: 28%;
+  }
+  .select{
+    width: 20%;
+  }
   
   table {
     width: 100%;

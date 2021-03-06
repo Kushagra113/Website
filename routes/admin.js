@@ -1,13 +1,11 @@
 // Requiring Necessary Modules
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const passport = require("passport");
 const payments = require("../config/payment_details_insert");
 const complaints = require("../config/crud");
 const auth_function = require("../config/auth");
 const contact_function = require("../config/contact_details");
-const { route } = require("./users");
+const getalldata = require("../config/getalldata");
 
 // Admin Home Page
 router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
@@ -165,10 +163,31 @@ router.post("/removeresolve",(req,res)=>{
     })
 })
 
+
 router.get("/members",auth_function.ensureAdmin,(req,res)=>{
-    res.render("members",{
-        user:req.user
-    });
+    getalldata.getdata((err,result)=>{
+        if(err){
+            throw err;
+        }
+        else{
+            res.render("members",{
+                user:req.user,
+                result:result
+            });
+        }
+    })
+})
+
+router.post("/getiddata",auth_function.ensureAdmin,(req,res)=>{
+    const id = req.body.id;
+    getalldata.getiddata(id,(err,result)=>{
+        if(err){
+            res.json({msg:"error"});
+        }
+        else{
+            res.json({msg:"success",data:result});
+        }
+    })
 })
 
 module.exports = router;
