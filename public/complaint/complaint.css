@@ -189,3 +189,6 @@ h1{
   ul{
     padding:0px;
   }
+  .resolved:focus,.edit:focus,.del:focus{
+    outline: none;
+  }
