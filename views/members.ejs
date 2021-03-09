@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Member Details</title>
+    <link rel="shortcut icon" type="image/jpg" href="/images/clipart1135280.png" />
     <link rel="stylesheet" href="/navbar/other_navlink.css">
     <link rel="stylesheet" href="/members/members.css">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
@@ -22,7 +23,7 @@
             <thead>
                 <tr>
                     <th>
-                         Members Of The Society
+                        Members Of The Society
                     </th>
                     <th>
                         E-mail
@@ -44,17 +45,17 @@
                 <% for(var i=0;i<result.length;i++){%>
                 <tr>
                     <td class="w user" value=<%= result[i].id %>>
-                    <%=result[i].username%>
+                        <%=result[i].username%>
                     </td>
                     <td class="w mail" value=<%= result[i].id %>>
-                    <%=result[i].email%>
+                        <%=result[i].email%>
                     </td>
                     <td class="w admin" value=<%= result[i].id %>>
-                    <%if(result[i].admin){%>
+                        <%if(result[i].admin){%>
                         Yes
-                    <%}else{%>
+                        <%}else{%>
                         No
-                    <%}%>
+                        <%}%>
                     </td>
                     <td class='select' value=<%= result[i].id %>>
                         <a class='button' href='#' style="font-size: 1.7rem;">

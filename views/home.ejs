@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Society Website</title>
+    <link rel="shortcut icon" type="image/jpg" href="/images/clipart1135280.png" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,900&display=swap"
@@ -66,8 +67,8 @@
                         <a class="nav-link r-link link text-underlined" id='4'
                             <%if(user.admin){%>href='/admin/complaint' <%}else{%>href='/users/complaint' <%}%>
                                     >Complaint</a>
-                                    <a class="nav-link active r-link link text-underlined" id='1' aria-current="page"
-                                    <%if(user.admin){%>href='/admin/members' <%}else{%>href='/users/members' <%}%>>Members</a>
+                        <a class="nav-link active r-link link text-underlined" id='1' aria-current="page"
+                            <%if(user.admin){%>href='/admin/members' <%}else{%>href='/users/members' <%}%>>Members</a>
                         <a class="nav-link r-link link text-underlined" <%if(user.admin){%>href='/admin/aboutus'
                             <%}else{%>href='/users/aboutus' <%}%>>AboutUs
                         </a>
@@ -132,41 +133,33 @@
                                                 No Payments Made From The Website
                                             </div>
                                             <%}%>
+                <div class="arrow1">
+                    <a href="#services" class="scroll"><img src="/images/arrow1.png" alt="" /></a>
+                </div>
                 <!-- portfolio-section-ends -->
                 <div class="services-section" id="services">
                     <div class="container">
                         <div class="services-header">
                             <h3>services</h3>
-                            <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-                                Aenean
-                                sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
-                                nibh
-                                id elit.
-                                Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum
-                                velit.
-                                Nam nec
-                                tellus a odio tincidunt auctor a ornare odio. </p>
+                            <p>Our Website provides many services for a member of society such as contactless payment system, Complaint management system and member details viewing system </p>
                         </div>
                         <div class="services-sectiongrids">
                             <div class="col-md-4 services-grid">
                                 <img src="/images/img1.png" alt="" />
                                 <h4>Payment Management</h4>
-                                <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor
-                                    aliquet.
+                                <p>In cashless transactions, payments are made or accepted without the use of hard cash. This includes payments made via credit/debit cards, cheques, DD, NEFT, RTGS or any other form of online payment that removes the need for cash.
                                 </p>
                             </div>
                             <div class="col-md-4 services-grid">
                                 <img src="/images/img2.png" alt="" />
                                 <h4>Complaint Management</h4>
-                                <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor
-                                    aliquet.
+                                <p>Complaint management is the process of handling, managing, responding to, and reporting customer grievances. This process requires a streamlined approach and constant monitoring to ensure faster resolutions.
                                 </p>
                             </div>
                             <div class="col-md-4 services-grid">
                                 <img src="/images/img3.png" alt="" />
-                                <h4>web development</h4>
-                                <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor
-                                    aliquet.
+                                <h4>Member Details</h4>
+                                <p>Our site helps tells you details of all the members in the society so you can know each other better.
                                 </p>
                             </div>
                             <div class="clearfix"></div>
@@ -178,7 +171,7 @@
                 </div>
                 <!-- services-section-ends -->
                 </div>
-                <div class="footer-section" id="contact" id="contact">
+                <div class="footer-section" id="contact">
                     <div class="container">
                         <div class="contact-header">
                             <h3> contact</h3>
