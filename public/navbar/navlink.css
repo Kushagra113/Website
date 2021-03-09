@@ -80,8 +80,7 @@ CORE
 }
 
 .link:focus{
-	outline: 2px solid #fed330;
-	outline-offset: .5rem;
+	outline: none;
 }
 
 /*
