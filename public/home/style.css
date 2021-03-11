@@ -32,9 +32,7 @@ ul{
 body{
 	padding:0 0;
 	margin:0 0; 
-	font-family: 'Open Sans', sans-serif;
-	
-	
+	font-family: 'Baloo 2', cursive;
 }
 .header{
 	background: url("../images/banner.jpg") no-repeat center top;
@@ -885,6 +883,15 @@ padding-bottom: 2em;
 }
 #home-nav{
 height: 100px;
+}
+#no-payment{
+	color: blue;
+	background-color: rgb(211, 211, 62);
+	margin-top: 8%;
+	display: flex;
+	align-content:center;
+	justify-content: center;
+	padding: 5%;
 }
        /*-- responsive-mediaquries --*/
 		@media(max-width:1080px){

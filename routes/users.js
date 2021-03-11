@@ -17,17 +17,30 @@ router.get("/home/alldetails", auth_function.ensureAuthenticated, (req, res) => 
             res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
         }
         else{
-            if(result.length>0){
-                res.render("home", {
-                    user: req.user,
-                    payment:result
-                });
-            }
-            else{
-                res.render("home", {
-                    user: req.user
-                });
-            }
+            complaints.getidcomplaint(req.user.id, (err, result_c) => {
+                complaint_number = result_c.length;
+                complaints.getidresolve(req.user.id, (err, result_r) => {
+                    resolve_number = result_r.length;
+                    if (result.length > 0) {
+                        res.render("home", {
+                            user: req.user,
+                            payment: result,
+                            c_no: complaint_number,
+                            r_no: resolve_number,
+                            p_no:result.length
+                        });
+        
+                    }
+                    else {
+                        res.render("home", {
+                            user: req.user,
+                            c_no: complaint_number,
+                            r_no: resolve_number,
+                            p_no:result.length
+                        });
+                    }
+                })
+            })
         }
     })
 })
@@ -40,17 +53,30 @@ router.get("/home/lastmonth",auth_function.ensureAuthenticated,(req,res)=>{
             res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
         }
         else{
-            if(result.length>0){
-                res.render("home", {
-                    user: req.user,
-                    payment:result
-                });
-            }
-            else{
-                res.render("home", {
-                    user: req.user
-                });
-            }
+            complaints.getidcomplaint(req.user.id, (err, result_c) => {
+                complaint_number = result_c.length;
+                complaints.getidresolve(req.user.id, (err, result_r) => {
+                    resolve_number = result_r.length;
+                    if (result.length > 0) {
+                        res.render("home", {
+                            user: req.user,
+                            payment: result,
+                            c_no: complaint_number,
+                            r_no: resolve_number,
+                            p_no:result.length
+                        });
+        
+                    }
+                    else {
+                        res.render("home", {
+                            user: req.user,
+                            c_no: complaint_number,
+                            r_no: resolve_number,
+                            p_no:result.length
+                        });
+                    }
+                })
+            })
         }
     })
 })
@@ -82,6 +108,19 @@ router.get("/aboutus",auth_function.ensureAuthenticated,(req,res)=>{
         user:req.user
     });
 })
+// Get Resolve
+
+router.get("/getresolve", auth_function.ensureAuthenticated,(req, res) => {
+    complaints.getresolve((err, result) => {
+        if (err) {
+            res.json({ msg: "error" })
+        }
+        else {
+            res.json({ msg: "success", data: result });
+        }
+    })
+})
+
 
 // Complaint page
 router.get("/complaint",auth_function.ensureAuthenticated,(req,res)=>{

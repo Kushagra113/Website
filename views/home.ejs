@@ -11,6 +11,8 @@
         rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/navbar/navlink.css">
     <script type="application/x-javascript">
@@ -44,6 +46,9 @@
             location.href="http://localhost:3000/admin/home/lastmonth";
         }
     </script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"
+        integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw=="
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -60,7 +65,8 @@
                 <div class="collapse navbar-collapse pull-right" id="navbarlist">
                     <div class="navbar-nav">
                         <a class="nav-link active r-link link text-underlined" id='1' aria-current="page"
-                            <%if(user.admin){%>href='/admin/home/alldetails' <%}else{%>href='/users/home/alldetails' <%}%>>Home</a>
+                            <%if(user.admin){%>href='/admin/home/alldetails' <%}else{%>href='/users/home/alldetails'
+                                <%}%>>Home</a>
                         <a class="nav-link r-link link text-underlined" id='4' <%if(user.admin){%>href='/admin/payment'
                             <%}else{%>href='/users/payment' <%}%>>Payment
                         </a>
@@ -98,41 +104,51 @@
 
     </div>
 
+    <canvas  class="container" id="myChart"height="400" >
 
-    <%if(locals.payment){%> <div class="container-fluid mt-3">
-                            <h2 class="text-center" id="payment-heading">Payments</h2>
-                            <div class="mt-3 d-xl-flex justify-content-center">
-                                <button type="button" class="btn btn-primary" id="show_payment">Show Latest Month
-                                    Payment</button>
-                                <button type="button" class="btn btn-primary" id="show_all">Show All Payments</button>
-                            </div>
-                            <div class="row payment-container d-xl-flex flex-row">
-                                <% for(var i=0;i<payment.length;i++){%>
-                                <div class="card" style="width: 30rem;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Payment</h5>
-                                    </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Amount Done By <%=payment[i].name%>
-                                        </li>
-                                        <li class="list-group-item">Payment of <%=payment[i].amount%> Is Done</li>
-                                        <li class="list-group-item">Payment Done On <%=payment[i].date%>
-                                        </li>
-                                        <li class="list-group-item">Payment Done For Reason:
-                                            <%=payment[i].reason_for_payment%>
-                                        </li>
-                                    </ul>
-                                    <div class="card-body">
-                                        <a <%if(user.admin){%>href='/admin/payment' <%}else{%>href='/users/payment' <%}%>
+    </canvas>
+
+    <%if(locals.payment){%>
+        <div class="container-fluid mt-3">
+            <h2 class="text-center" id="payment-heading">Payments</h2>
+            <div class="mt-3 d-xl-flex justify-content-center">
+                <button type="button" class="btn btn-primary" id="show_payment">Show Latest Month
+                    Payment</button>
+                <button type="button" class="btn btn-primary" id="show_all">Show All Payments</button>
+            </div>
+            <div class="row payment-container d-xl-flex flex-row justify-content-center">
+                <% for(var i=0;i<payment.length;i++){%>
+                    <div class="card" style="width: 30rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Payment</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Amount Done By <%=payment[i].name%>
+                            </li>
+                            <li class="list-group-item">Payment of <%=payment[i].amount%> Is Done</li>
+                            <li class="list-group-item">Payment Done On <%=payment[i].date%>
+                            </li>
+                            <li class="list-group-item">Payment Done For Reason:
+                                <%=payment[i].reason_for_payment%>
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <a <%if(user.admin){%>href='/admin/payment' <%}else{%>href='/users/payment' <%}%>
                                         class="card-link">Add Payments</a>
                         </div>
                     </div>
                     <br>
-                    <%}%> </div> </div> <%} else{%> <!-- Code Goes here If No Payments are there -->
-                                            <div class="alert alert-primary" role="alert">
-                                                No Payments Made From The Website
-                                            </div>
-                                            <%}%>
+                    <%}%>
+            </div>
+        </div>
+        <%} else{%>
+            <div class="container" >
+            <!-- Code Goes here If No Payments are there -->
+            <h2 id="no-payment">No Payment Done From This Website <a <%if(user.admin){%>href='/admin/payment'
+                <%}else{%>href='/users/payment' <%}%>Click Here To Pay</a> </h2>
+            </div>
+            </div>
+            <%}%>
                 <div class="arrow1">
                     <a href="#services" class="scroll"><img src="/images/arrow1.png" alt="" /></a>
                 </div>
@@ -141,25 +157,31 @@
                     <div class="container">
                         <div class="services-header">
                             <h3>services</h3>
-                            <p>Our Website provides many services for a member of society such as contactless payment system, Complaint management system and member details viewing system </p>
+                            <p>Our Website provides many services for a member of society such as contactless payment
+                                system, Complaint management system and member details viewing system </p>
                         </div>
                         <div class="services-sectiongrids">
                             <div class="col-md-4 services-grid">
                                 <img src="/images/img1.png" alt="" />
                                 <h4>Payment Management</h4>
-                                <p>In cashless transactions, payments are made or accepted without the use of hard cash. This includes payments made via credit/debit cards, cheques, DD, NEFT, RTGS or any other form of online payment that removes the need for cash.
+                                <p>In cashless transactions, payments are made or accepted without the use of hard cash.
+                                    This includes payments made via credit/debit cards, cheques, DD, NEFT, RTGS or any
+                                    other form of online payment that removes the need for cash.
                                 </p>
                             </div>
                             <div class="col-md-4 services-grid">
                                 <img src="/images/img2.png" alt="" />
                                 <h4>Complaint Management</h4>
-                                <p>Complaint management is the process of handling, managing, responding to, and reporting customer grievances. This process requires a streamlined approach and constant monitoring to ensure faster resolutions.
+                                <p>Complaint management is the process of handling, managing, responding to, and
+                                    reporting customer grievances. This process requires a streamlined approach and
+                                    constant monitoring to ensure faster resolutions.
                                 </p>
                             </div>
                             <div class="col-md-4 services-grid">
                                 <img src="/images/img3.png" alt="" />
                                 <h4>Member Details</h4>
-                                <p>Our site helps tells you details of all the members in the society so you can know each other better.
+                                <p>Our site helps tells you details of all the members in the society so you can know
+                                    each other better.
                                 </p>
                             </div>
                             <div class="clearfix"></div>
@@ -176,18 +198,6 @@
                         <div class="contact-header">
                             <h3> contact</h3>
                             <p></p>
-                            <!-- <div class="alert alert-warning alert-dismissible mt-2" id="warning_alert" role="alert">
-                                Please Fill in All The Details To Contact The Secretary
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                            <div class="alert alert-success alert-dismissible" id="success_alert"role="alert">
-                                Contact Form Successfully Submitted
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                            <div class="alert alert-danger alert-dismissible" id="error_alert" role="alert">
-                                Some Error Occured. Please Try Again
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div> -->
                         </div>
 
                         <div class="contact">
@@ -223,23 +233,6 @@
                             <p>&copy; 2021 . All rights Reserved </p>
 
                         </div>
-                        <!-- <script type="text/javascript">
-                        $(document).ready(function () {
-                            /*
-                                    var defaults = {
-                                            containerID: 'toTop', // fading element id
-                                        containerHoverID: 'toTopHover', // fading element hover id
-                                        scrollSpeed: 1200,
-                                        easingType: 'linear' 
-                                        };
-                                    */
-
-                            $().UItoTop({
-                                easingType: 'easeOutQuart'
-                            });
-
-                        });
-                    </script> -->
                         <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;">
                             </span></a>
                     </div>
@@ -252,6 +245,75 @@
                     crossorigin="anonymous"></script>
                 <script src="/navbar/navbar.js" type="text/javascript"></script>
                 <script src="/home/jquery_home.js"></script>
+                <script>
+                    var payment_n = 0;
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var payment_n = '<%- JSON.stringify(p_no) %>';
+                    var complaint_n = '<%- JSON.stringify(c_no) %>';
+                    var resolve_n = '<%- JSON.stringify(r_no) %>';
+                    console.log(complaint_n);
+                    var myChart = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: ['Payments Done', 'Complaints Pending', 'Complaints Resolved'],
+                            datasets: [{
+                                data: [payment_n, complaint_n, resolve_n],
+                                backgroundColor: [
+                                    'lightblue',
+                                    'lightyellow',
+                                    'lightgreen'
+                                ],
+                                borderColor: [
+                                    'black',
+                                    'black',
+                                    'black'
+                                ],
+                                borderWidth: 1,
+                                hoverBorderWidth:3
+                            }]
+                        },
+                        options: {
+                            title:{
+                                display:true,
+                                text:"Management Bar Chart",
+                                fontSize:25,
+                                fontColor:"darkblack",
+                                fontfamily: 'Baloo 2 Cursive'
+                            },
+                            legend:{
+                               display:false
+                            },
+                            scales: {
+                                xAxes: [{
+                                    gridLines: {
+                                        // display: false
+                                        color:"lightgray"
+                                    },
+                                    ticks: {
+                                        beginAtZero: true,
+                                        fontStyle: "bold",
+                                        fontSize: 20,
+                                        fontColor:"green"
+                                    },
+                                    
+                                }],
+                                yAxes: [{ 
+                                    gridLines: {
+                                        display:false
+                                    },
+                                    ticks: {
+                                        beginAtZero: true,
+                                        fontStyle: "bold",
+                                        fontSize: 20,
+                                        fontColor:"blue"
+                                    },
+                                    barPercentage: 0.5
+                                }]
+                            },
+                            layout: [{}]
+                        }
+                    });
+                </script>
 </body>
 
 </html>

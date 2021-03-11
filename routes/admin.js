@@ -15,17 +15,30 @@ router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
             res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
         }
         else {
-            if (result.length > 0) {
-                res.render("home", {
-                    user: req.user,
-                    payment: result
-                });
-            }
-            else {
-                res.render("home", {
-                    user: req.user
-                });
-            }
+            complaints.getcomplaint_not_resolved((err, result_c) => {
+                complaint_number = result_c.length;
+                complaints.getallresolve((err, result_r) => {
+                    resolve_number = result_r.length;
+                    if (result.length > 0) {
+                        res.render("home", {
+                            user: req.user,
+                            payment: result,
+                            c_no: complaint_number,
+                            r_no: resolve_number,
+                            p_no:result.length
+                        });
+        
+                    }
+                    else {
+                        res.render("home", {
+                            user: req.user,
+                            c_no: complaint_number,
+                            r_no: resolve_number,
+                            p_no:result.length
+                        });
+                    }
+                })
+            })
         }
     })
 })
@@ -37,30 +50,43 @@ router.get("/home/lastmonth", auth_function.ensureAdmin, (req, res) => {
             res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
         }
         else {
-            if (result.length > 0) {
-                res.render("home", {
-                    user: req.user,
-                    payment: result
-                });
-            }
-            else {
-                res.render("home", {
-                    user: req.user
-                });
-            }
+            complaints.getcomplaint_not_resolved((err, result_c) => {
+                complaint_number = result_c.length;
+                complaints.getallresolve((err, result_r) => {
+                    resolve_number = result_r.length;
+                    if (result.length > 0) {
+                        res.render("home", {
+                            user: req.user,
+                            payment: result,
+                            c_no: complaint_number,
+                            r_no: resolve_number,
+                            p_no:result.length
+                        });
+        
+                    }
+                    else {
+                        res.render("home", {
+                            user: req.user,
+                            c_no: complaint_number,
+                            r_no: resolve_number,
+                            p_no:result.length
+                        });
+                    }
+                })
+            })
         }
     })
 })
 
-router.post("/home/contact",auth_function.ensureAdmin,(req,res)=>{
-    const {name,email,phone,msg}= req.body;
-    id=req.user.id;
-    contact_function.insertcontact_details(id,name,email,phone,msg,(err,result)=>{
-        if(err){
-            res.json({msg:"error"});
+router.post("/home/contact", auth_function.ensureAdmin, (req, res) => {
+    const { name, email, phone, msg } = req.body;
+    id = req.user.id;
+    contact_function.insertcontact_details(id, name, email, phone, msg, (err, result) => {
+        if (err) {
+            res.json({ msg: "error" });
         }
-        else{
-            res.json({msg:"success"});
+        else {
+            res.json({ msg: "success" });
         }
     })
 })
@@ -89,9 +115,9 @@ router.get("/aboutus", auth_function.ensureAdmin, (req, res) => {
 
 // Adding Payment Details to the database
 router.post("/payment", auth_function.ensureAdmin, (req, res) => {
-    const { name, cardnumber, expirationdate, securitycode, amount,reason } = req.body;
-    const id=req.user.id;
-    payments.addpaymentdetails(id,name, cardnumber, expirationdate, securitycode, amount,reason ,(err, result) => {
+    const { name, cardnumber, expirationdate, securitycode, amount, reason } = req.body;
+    const id = req.user.id;
+    payments.addpaymentdetails(id, name, cardnumber, expirationdate, securitycode, amount, reason, (err, result) => {
         if (err) {
             console.log(err);
             res.json({ msg: "error" })
@@ -103,13 +129,13 @@ router.post("/payment", auth_function.ensureAdmin, (req, res) => {
 });
 
 // Printing All The Complaints
-router.get("/complaint/getdata",auth_function.ensureAdmin,(req,res)=>{
-    complaints.getcomplaint((err,result)=>{
-        if(err){
-            res.json({msg:"error"});
+router.get("/complaint/getdata", auth_function.ensureAdmin, (req, res) => {
+    complaints.getcomplaint((err, result) => {
+        if (err) {
+            res.json({ msg: "error" });
         }
-        else{
-            res.json({msg:"success",data:result});
+        else {
+            res.json({ msg: "success", data: result });
         }
     })
 })
@@ -127,65 +153,64 @@ router.delete("/complaint/removecomplaint", auth_function.ensureAdmin, (req, res
     });
 })
 
-router.post("/sendresolve",(req,res)=>{
-    const {id, complaint,resolved} = req.body;
-    complaints.setresolve(id,complaint,resolved,(err,result)=>
-    {
-        if(err){
-            res.json({msg:"error"});
+router.post("/sendresolve", auth_function.ensureAdmin,(req, res) => {
+    const { id, complaint, resolved } = req.body;
+    complaints.setresolve(id, complaint, resolved, (err, result) => {
+        if (err) {
+            res.json({ msg: "error" });
         }
-        else{
-            res.json({msg:"success",data:result})
-        }
-    })
-})
-
-router.get("/getresolve",(req,res)=>{
-    complaints.getresolve((err,result)=>{
-        if(err){
-            res.json({msg:"error"})
-        }
-        else{
-            res.json({msg:"success",data:result});
+        else {
+            res.json({ msg: "success", data: result })
         }
     })
 })
 
-router.post("/removeresolve",(req,res)=>{
-    const {id,complaint}= req.body
-    complaints.removeresolve(id,complaint,(err,result)=>{
-        if(err){
-            res.json({msg:"error"});
+router.get("/getresolve", auth_function.ensureAdmin,(req, res) => {
+    complaints.getresolve((err, result) => {
+        if (err) {
+            res.json({ msg: "error" })
         }
-        else{
-            res.json({msg:"success"});
+        else {
+            res.json({ msg: "success", data: result });
+        }
+    })
+})
+
+router.post("/removeresolve", (req, res) => {
+    const { id, complaint } = req.body
+    complaints.removeresolve(id, complaint, (err, result) => {
+        if (err) {
+            res.json({ msg: "error" });
+        }
+        else {
+            res.json({ msg: "success" });
         }
     })
 })
 
 
-router.get("/members",auth_function.ensureAdmin,(req,res)=>{
-    getalldata.getdata((err,result)=>{
-        if(err){
+router.get("/members", auth_function.ensureAdmin, (req, res) => {
+    getalldata.getdata((err, result) => {
+        if (err) {
             throw err;
         }
-        else{
-            res.render("members",{
-                user:req.user,
-                result:result
+        else {
+            res.render("members", {
+                user: req.user,
+                result: result
             });
         }
     })
 })
 
-router.post("/getiddata",auth_function.ensureAdmin,(req,res)=>{
+router.post("/getiddata", auth_function.ensureAdmin, (req, res) => {
     const id = req.body.id;
-    getalldata.getiddata(id,(err,result)=>{
-        if(err){
-            res.json({msg:"error"});
+    getalldata.getiddata(id, (err, result) => {
+        if (err) {
+            res.json({ msg: "error" });
         }
-        else{
-            res.json({msg:"success",data:result});
+        else {
+            res.json({ msg: "success", data: result });
         }
     })
 })

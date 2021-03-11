@@ -103,3 +103,55 @@ module.exports.removeresolve=(id,complaint,cb)=>{
         }
     })
 }
+
+module.exports.getidcomplaint=(id,cb)=>{
+    con.query("select * from complaints where id=? and resolved=0",id,(err,result)=>{
+        if(err){
+            console.log(err);
+            cb(err,null);
+        }
+        else{
+            cb(null,result)
+        }
+    })
+}
+
+
+module.exports.getcomplaint_not_resolved=(id,cb)=>{
+    con.query("select * from complaints where resolved=0",id,(err,result)=>{
+        if(err){
+            console.log(err);
+            cb(err,null);
+        }
+        else{
+            cb(null,result)
+        }
+    })
+}
+
+
+
+module.exports.getidresolve=(id,cb)=>{
+    con.query("select * from complaints where id=? and resolved=1",id,(err,result)=>{
+        if(err){
+            console.log(err);
+            cb(err,null);
+        }
+        else{
+            cb(null,result)
+        }
+    })
+}
+
+module.exports.getallresolve=(id,cb)=>{
+    con.query("select * from complaints where resolved=1",id,(err,result)=>{
+        if(err){
+            console.log(err);
+            cb(err,null);
+        }
+        else{
+            cb(null,result)
+        }
+    })
+}
+
