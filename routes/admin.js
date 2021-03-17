@@ -9,210 +9,230 @@ const getalldata = require("../config/getalldata");
 
 // Admin Home Page
 router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
-    payments.alldetails(req.user.id, (err, result) => {
-        if (err) {
-            console.log(err);
-            res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
-        }
-        else {
-            complaints.getcomplaint_not_resolved((err, result_c) => {
-                complaint_number = result_c.length;
-                complaints.getallresolve((err, result_r) => {
-                    resolve_number = result_r.length;
-                    if (result.length > 0) {
-                        res.render("home", {
-                            user: req.user,
-                            payment: result,
-                            c_no: complaint_number,
-                            r_no: resolve_number,
-                            p_no:result.length
-                        });
-        
-                    }
-                    else {
-                        res.render("home", {
-                            user: req.user,
-                            c_no: complaint_number,
-                            r_no: resolve_number,
-                            p_no:result.length
-                        });
-                    }
-                })
-            })
-        }
-    })
-})
+  payments.alldetails(req.user.id, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(
+        "Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused"
+      );
+    } else {
+      complaints.getcomplaint_not_resolved((err, result_c) => {
+        complaint_number = result_c.length;
+        complaints.getallresolve((err, result_r) => {
+          resolve_number = result_r.length;
+          if (result.length > 0) {
+            res.render("home", {
+              user: req.user,
+              payment: result,
+              c_no: complaint_number,
+              r_no: resolve_number,
+              p_no: result.length,
+            });
+          } else {
+            res.render("home", {
+              user: req.user,
+              c_no: complaint_number,
+              r_no: resolve_number,
+              p_no: result.length,
+            });
+          }
+        });
+      });
+    }
+  });
+});
 
 router.get("/home/lastmonth", auth_function.ensureAdmin, (req, res) => {
-    payments.lastmonth(req.user.id, (err, result) => {
-        if (err) {
-            console.log(err);
-            res.send("Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused");
-        }
-        else {
-            complaints.getcomplaint_not_resolved((err, result_c) => {
-                complaint_number = result_c.length;
-                complaints.getallresolve((err, result_r) => {
-                    resolve_number = result_r.length;
-                    if (result.length > 0) {
-                        res.render("home", {
-                            user: req.user,
-                            payment: result,
-                            c_no: complaint_number,
-                            r_no: resolve_number,
-                            p_no:result.length
-                        });
-        
-                    }
-                    else {
-                        res.render("home", {
-                            user: req.user,
-                            c_no: complaint_number,
-                            r_no: resolve_number,
-                            p_no:result.length
-                        });
-                    }
-                })
-            })
-        }
-    })
-})
+  payments.lastmonth(req.user.id, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(
+        "Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused"
+      );
+    } else {
+      complaints.getcomplaint_not_resolved((err, result_c) => {
+        complaint_number = result_c.length;
+        complaints.getallresolve((err, result_r) => {
+          resolve_number = result_r.length;
+          if (result.length > 0) {
+            res.render("home", {
+              user: req.user,
+              payment: result,
+              c_no: complaint_number,
+              r_no: resolve_number,
+              p_no: result.length,
+            });
+          } else {
+            res.render("home", {
+              user: req.user,
+              c_no: complaint_number,
+              r_no: resolve_number,
+              p_no: result.length,
+            });
+          }
+        });
+      });
+    }
+  });
+});
 
 router.post("/home/contact", auth_function.ensureAdmin, (req, res) => {
-    const { name, email, phone, msg } = req.body;
-    id = req.user.id;
-    contact_function.insertcontact_details(id, name, email, phone, msg, (err, result) => {
-        if (err) {
-            res.json({ msg: "error" });
-        }
-        else {
-            res.json({ msg: "success" });
-        }
-    })
-})
-
+  const { name, email, phone, msg } = req.body;
+  id = req.user.id;
+  contact_function.insertcontact_details(
+    id,
+    name,
+    email,
+    phone,
+    msg,
+    (err, result) => {
+      if (err) {
+        res.json({ msg: "error" });
+      } else {
+        res.json({ msg: "success" });
+      }
+    }
+  );
+});
 
 // Admin Complaint Page
 router.get("/complaint", auth_function.ensureAdmin, (req, res) => {
-    res.render("complaint", {
-        user: req.user
-    })
+  res.render("complaint", {
+    user: req.user,
+  });
 });
 
 // Admin Payment Page
 router.get("/payment", auth_function.ensureAdmin, (req, res) => {
-    res.render("payment", {
-        user: req.user
-    });
-})
+  res.render("payment", {
+    user: req.user,
+  });
+});
 
 // Admin About Us Page
 router.get("/aboutus", auth_function.ensureAdmin, (req, res) => {
-    res.render("aboutus", {
-        user: req.user
-    });
-})
+  res.render("aboutus", {
+    user: req.user,
+  });
+});
 
 // Adding Payment Details to the database
 router.post("/payment", auth_function.ensureAdmin, (req, res) => {
-    const { name, cardnumber, expirationdate, securitycode, amount, reason } = req.body;
-    const id = req.user.id;
-    payments.addpaymentdetails(id, name, cardnumber, expirationdate, securitycode, amount, reason, (err, result) => {
-        if (err) {
-            console.log(err);
-            res.json({ msg: "error" })
-        }
-        else {
-            res.json({ msg: "success_insert" });
-        }
-    });
+  const {
+    name,
+    cardnumber,
+    expirationdate,
+    securitycode,
+    amount,
+    reason,
+  } = req.body;
+  const id = req.user.id;
+  payments.addpaymentdetails(
+    id,
+    name,
+    cardnumber,
+    expirationdate,
+    securitycode,
+    amount,
+    reason,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.json({ msg: "error" });
+      } else {
+        res.json({ msg: "success_insert" });
+      }
+    }
+  );
 });
 
 // Printing All The Complaints
 router.get("/complaint/getdata", auth_function.ensureAdmin, (req, res) => {
-    complaints.getcomplaint((err, result) => {
-        if (err) {
-            res.json({ msg: "error" });
-        }
-        else {
-            res.json({ msg: "success", data: result });
-        }
-    })
-})
+  complaints.getcomplaint((err, result) => {
+    if (err) {
+      res.json({ msg: "error" });
+    } else {
+      res.json({ msg: "success", data: result });
+    }
+  });
+});
 
 // Admin Deleting Permissions
-router.delete("/complaint/removecomplaint", auth_function.ensureAdmin, (req, res) => {
-    complaints.removecomplaint(req.body.id, req.body.complaint, (err, result) => {
+router.delete(
+  "/complaint/removecomplaint",
+  auth_function.ensureAdmin,
+  (req, res) => {
+    complaints.removecomplaint(
+      req.body.id,
+      req.body.complaint,
+      (err, result) => {
         if (err) {
-            console.log(err);
-            res.json({ msg: "error" });
+          console.log(err);
+          res.json({ msg: "error" });
+        } else {
+          res.json({ msg: "success" });
         }
-        else {
-            res.json({ msg: "success" });
-        }
-    });
-})
+      }
+    );
+  }
+);
 
-router.post("/sendresolve", auth_function.ensureAdmin,(req, res) => {
-    const { id, complaint, resolved } = req.body;
-    complaints.setresolve(id, complaint, resolved, (err, result) => {
-        if (err) {
-            res.json({ msg: "error" });
-        }
-        else {
-            res.json({ msg: "success", data: result })
-        }
-    })
-})
+router.post("/sendresolve", auth_function.ensureAdmin, (req, res) => {
+  const { id, complaint, resolved } = req.body;
+  complaints.setresolve(id, complaint, resolved, (err, result) => {
+    if (err) {
+      res.json({ msg: "error" });
+    } else {
+      res.json({ msg: "success", data: result });
+    }
+  });
+});
 
-router.get("/getresolve", auth_function.ensureAdmin,(req, res) => {
-    complaints.getresolve((err, result) => {
-        if (err) {
-            res.json({ msg: "error" })
-        }
-        else {
-            res.json({ msg: "success", data: result });
-        }
-    })
-})
+router.get("/getresolve", auth_function.ensureAdmin, (req, res) => {
+  complaints.getresolve((err, result) => {
+    if (err) {
+      res.json({ msg: "error" });
+    } else {
+      res.json({ msg: "success", data: result });
+    }
+  });
+});
 
 router.post("/removeresolve", (req, res) => {
-    const { id, complaint } = req.body
-    complaints.removeresolve(id, complaint, (err, result) => {
-        if (err) {
-            res.json({ msg: "error" });
-        }
-        else {
-            res.json({ msg: "success" });
-        }
-    })
-})
-
+  const { id, complaint } = req.body;
+  complaints.removeresolve(id, complaint, (err, result) => {
+    if (err) {
+      res.json({ msg: "error" });
+    } else {
+      res.json({ msg: "success" });
+    }
+  });
+});
 
 router.get("/members", auth_function.ensureAdmin, (req, res) => {
-    getalldata.getdata((err, result) => {
-        if (err) {
-            throw err;
-        }
-        else {
-            res.render("members", {
-                user: req.user,
-                result: result
-            });
-        }
-    })
-})
+  getalldata.getdata((err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.render("members", {
+        user: req.user,
+        result: result,
+      });
+    }
+  });
+});
 
 router.post("/getiddata", auth_function.ensureAdmin, (req, res) => {
-    const id = req.body.id;
-    getalldata.getiddata(id, (err, result) => {
-        if (err) {
-            res.json({ msg: "error" });
-        }
-        else {
-            res.json({ msg: "success", data: result });
-        }
-    })
-})
-
+  const id = req.body.id;
+  getalldata.getiddata(id, (err, result) => {
+    if (err) {
+      res.json({ msg: "error" });
+    } else {
+      res.json({ msg: "success", data: result });
+    }
+  });
+});
+router.get("/game", auth_function.ensureAdmin, (req, res) => {
+  res.render("game");
+});
 module.exports = router;
