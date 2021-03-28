@@ -6,7 +6,7 @@ const complaints = require("../config/crud");
 const auth_function = require("../config/auth");
 const contact_function = require("../config/contact_details");
 const getalldata = require("../config/getalldata");
-
+const https = require("https");
 // Admin Home Page
 router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
   payments.alldetails(req.user.id, (err, result) => {
@@ -20,22 +20,64 @@ router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
         complaint_number = result_c.length;
         complaints.getallresolve((err, result_r) => {
           resolve_number = result_r.length;
-          if (result.length > 0) {
-            res.render("home", {
-              user: req.user,
-              payment: result,
-              c_no: complaint_number,
-              r_no: resolve_number,
-              p_no: result.length,
+          const query = "Mumbai";
+          const apikey = "05ff10383ebc09884cf8eb08bc57362e";
+          const unit = "metric";
+          const url =
+            "https://api.openweathermap.org/data/2.5/weather?q=" +
+            query +
+            "&appid=" +
+            apikey +
+            "&units=" +
+            unit;
+          https.get(url, function (response) {
+            console.log(response.statusCode);
+            response.on("data", function (data) {
+              const weatherData = JSON.parse(data);
+              const temp = weatherData.main.temp;
+              const description = weatherData.weather[0].description;
+              const icon = weatherData.weather[0].icon;
+              const iconurl =
+                "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+              const weatherd =
+                "The weather is currently " +
+                description +
+                "The temprature in " +
+                query +
+                " is " +
+                temp +
+                +" degree celcius" +
+                "<img src=" +
+                iconurl +
+                " alt=''>";
+              res.render("home", {
+                user: req.user,
+                payment: result,
+                c_no: complaint_number,
+                r_no: resolve_number,
+                p_no: result.length,
+                w: weatherd,
+              });
             });
-          } else {
-            res.render("home", {
-              user: req.user,
-              c_no: complaint_number,
-              r_no: resolve_number,
-              p_no: result.length,
-            });
-          }
+          });
+          // if (result.length > 0) {
+          //   res.render("home", {
+          //     user: req.user,
+          //     payment: result,
+          //     c_no: complaint_number,
+          //     r_no: resolve_number,
+          //     p_no: result.length,
+          //     // w: weatherdata,
+          //   });
+          // } else {
+          //   res.render("home", {
+          //     user: req.user,
+          //     c_no: complaint_number,
+          //     r_no: resolve_number,
+          //     p_no: result.length,
+          //     // w: weatherData,
+          //   });
+          // }
         });
       });
     }
@@ -75,6 +117,48 @@ router.get("/home/lastmonth", auth_function.ensureAdmin, (req, res) => {
     }
   });
 });
+// router.post("/weather", auth_function.ensureAdmin, (req, res) => {
+//   const query = "Mumbai";
+//   const apikey = "05ff10383ebc09884cf8eb08bc57362e";
+//   const unit = "metric";
+//   const url =
+//     "https://api.openweathermap.org/data/2.5/weather?q=" +
+//     query +
+//     "&appid=" +
+//     apikey +
+//     "&units=" +
+//     unit;
+//   https.get(url, function (response) {
+//     console.log(response.statusCode);
+//     response.on("data", function (data) {
+//       const weatherData = JSON.parse(data);
+//       const temp = weatherData.main.temp;
+//       const description = weatherData.weather[0].description;
+//       const icon = weatherData.weather[0].icon;
+//       const iconurl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+//       console.log("<p>The weather is currently " + description);
+//       console.log(
+//         "<h1>The temprature in " +
+//           query +
+//           " is " +
+//           temp +
+//           " degree celcius</h1>"
+//       );
+//       console.log("<img src=" + iconurl + " alt=''>");
+//     });
+//   });
+// });
+
+// res.write("<p>The weather is currently " + description);
+// res.write(
+//     "<h1>The temprature in " +
+//     query +
+//     " is " +
+//     temp +
+//     " degree celcius</h1>"
+// );
+// res.write("<img src=" + iconurl + " alt=''>");
+// res.send();
 
 router.post("/home/contact", auth_function.ensureAdmin, (req, res) => {
   const { name, email, phone, msg } = req.body;
