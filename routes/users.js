@@ -383,10 +383,8 @@ router.post("/sign", (req, res) => {
                                     if (err) {
                                         throw err;
                                     } else {
-                                        // console.log(password);
                                         password_hashed = hash;
-                                        sql =
-                                            "insert into account(username,email,password,admin,Phone_no,Flat_no,Gender) values(?,?,?,?,?,?,?)";
+                                        sql ="insert into account(username,email,password,admin,Phone_no,Flat_no,Gender) values(?,?,?,?,?,?,?)";
                                         con.query(
                                             sql, [
                                                 Username,
@@ -401,11 +399,25 @@ router.post("/sign", (req, res) => {
                                                 if (err) {
                                                     throw err;
                                                 } else {
-                                                    req.flash(
-                                                        "success_msg",
-                                                        "You are successfully Registered and now can Log in"
-                                                    );
-                                                    res.redirect("/login");
+                                                    con.query("select id from account where email=?",[email],(err,result_id)=>{
+                                                        if(err){
+                                                            throw err;
+                                                        }
+                                                        else{
+                                                            con.query("insert into transaction_wallet(id)values(?)",result_id[0].id,(err,result)=>{
+                                                                if(err){
+                                                                    throw err;
+                                                                }
+                                                                else{
+                                                                    req.flash(
+                                                                        "success_msg",
+                                                                        "You are successfully Registered and now can Log in"
+                                                                    );
+                                                                    res.redirect("/login");
+                                                                }
+                                                            })
+                                                        }
+                                                    })
                                                 }
                                             }
                                         );

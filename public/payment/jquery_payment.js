@@ -28,7 +28,7 @@ $(document).ready(function(){
                             data:{name,cardnumber,expirationdate,securitycode,amount,reason},
                             success:function(response){
                                 if(response.msg=='success_insert'){
-                                    alert("Payment Done");
+                                    alert(response.msg1);
                                 }
                                 else{
                                     alert("Some Error Occured Try Again");

@@ -43,7 +43,7 @@ router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
               c_no: complaint_number,
               r_no: resolve_number,
               p_no: result.length,
-              weather:weatherData,
+              weather:weatherdata,
               imageurl:url
             });
           }
@@ -156,7 +156,7 @@ router.post("/payment", auth_function.ensureAdmin, (req, res) => {
         console.log(err);
         res.json({ msg: "error" });
       } else {
-        res.json({ msg: "success_insert" });
+        res.json({ msg: "success_insert",msg1:result });
       }
     }
   );
