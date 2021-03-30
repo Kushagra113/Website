@@ -8,6 +8,13 @@ const complaints = require("../config/crud");
 const payments = require("../config/payment_details_insert");
 const auth_function = require("../config/auth");
 const getalldata = require("../config/getalldata");
+var weatherdata ;
+
+// Fetching Weather DATA (Request To Weater API)
+require("../api/weather_api")().then((data)=>{
+  weatherdata=data[0];
+  url=data[1]
+});
 
 // Home Page
 router.get(
@@ -21,28 +28,32 @@ router.get(
                     "Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused"
                 );
             } else {
-                complaints.getidcomplaint(req.user.id, (err, result_c) => {
+                complaints.getcomplaint_not_resolved((err, result_c) => {
                     complaint_number = result_c.length;
-                    complaints.getidresolve(req.user.id, (err, result_r) => {
-                        resolve_number = result_r.length;
-                        if (result.length > 0) {
-                            res.render("home", {
-                                user: req.user,
-                                payment: result,
-                                c_no: complaint_number,
-                                r_no: resolve_number,
-                                p_no: result.length,
-                            });
-                        } else {
-                            res.render("home", {
-                                user: req.user,
-                                c_no: complaint_number,
-                                r_no: resolve_number,
-                                p_no: result.length,
-                            });
-                        }
+                    complaints.getallresolve((err, result_r) => {
+                      resolve_number = result_r.length;
+                       if (result.length > 0) {
+                        res.render("home", {
+                          user: req.user,
+                          payment: result,
+                          c_no: complaint_number,
+                          r_no: resolve_number,
+                          p_no: result.length,
+                          weather:weatherdata,
+                          imageurl:url
+                        });
+                      } else {
+                        res.render("home", {
+                          user: req.user,
+                          c_no: complaint_number,
+                          r_no: resolve_number,
+                          p_no: result.length,
+                          weather:weatherData,
+                          imageurl:url
+                        });
+                      }
                     });
-                });
+                  });
             }
         });
     }
@@ -57,28 +68,32 @@ router.get("/home/lastmonth", auth_function.ensureAuthenticated, (req, res) => {
                 "Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused"
             );
         } else {
-            complaints.getidcomplaint(req.user.id, (err, result_c) => {
+            complaints.getcomplaint_not_resolved((err, result_c) => {
                 complaint_number = result_c.length;
-                complaints.getidresolve(req.user.id, (err, result_r) => {
-                    resolve_number = result_r.length;
-                    if (result.length > 0) {
-                        res.render("home", {
-                            user: req.user,
-                            payment: result,
-                            c_no: complaint_number,
-                            r_no: resolve_number,
-                            p_no: result.length,
-                        });
-                    } else {
-                        res.render("home", {
-                            user: req.user,
-                            c_no: complaint_number,
-                            r_no: resolve_number,
-                            p_no: result.length,
-                        });
-                    }
+                complaints.getallresolve((err, result_r) => {
+                  resolve_number = result_r.length;
+                   if (result.length > 0) {
+                    res.render("home", {
+                      user: req.user,
+                      payment: result,
+                      c_no: complaint_number,
+                      r_no: resolve_number,
+                      p_no: result.length,
+                      weather:weatherdata,
+                      imageurl:url
+                    });
+                  } else {
+                    res.render("home", {
+                      user: req.user,
+                      c_no: complaint_number,
+                      r_no: resolve_number,
+                      p_no: result.length,
+                      weather:weatherData,
+                      imageurl:url
+                    });
+                  }
                 });
-            });
+              });
         }
     });
 });

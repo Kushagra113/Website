@@ -893,6 +893,11 @@ height: 100px;
 	justify-content: center;
 	padding: 5%;
 }
+.weather{
+	font-family: 'Baloo 2', cursive;
+	font-size: 2rem;
+
+}
        /*-- responsive-mediaquries --*/
 		@media(max-width:1080px){
 			.grid_box a:hover .zoom-icon {
