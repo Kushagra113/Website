@@ -9,7 +9,7 @@ const payments = require("../config/payment_details_insert");
 const auth_function = require("../config/auth");
 const getalldata = require("../config/getalldata");
 var weatherdata ;
-
+var url;
 // Fetching Weather DATA (Request To Weater API)
 require("../api/weather_api")().then((data)=>{
   weatherdata=data[0];
@@ -43,12 +43,13 @@ router.get(
                           imageurl:url
                         });
                       } else {
+                          console.log("W"+weatherdata)
                         res.render("home", {
                           user: req.user,
                           c_no: complaint_number,
                           r_no: resolve_number,
                           p_no: result.length,
-                          weather:weatherData,
+                          weather:weatherdata,
                           imageurl:url
                         });
                       }

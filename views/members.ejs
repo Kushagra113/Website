@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Details</title>
     <link rel="shortcut icon" type="image/jpg" href="/images/clipart1135280.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="/navbar/other_navlink.css">
     <link rel="stylesheet" href="/members/members.css">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
@@ -15,111 +17,179 @@
 
 <body>
     <%- include ("./partials/navbar_repeat"); %>
-    <h1>
-        Members Of The Society
-    </h1>
-    <main>
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        Members Of The Society
-                    </th>
-                    <th>
-                        E-mail
-                    </th>
-                    <th>
-                        Is a Committee Member
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th colspan='4'>
-                        Year: 2021
-                    </th>
-                </tr>
-            </tfoot>
-            <tbody>
-                <% for(var i=0;i<result.length;i++){%>
-                <tr>
-                    <td class="w user" value=<%= result[i].id %>>
-                        <%=result[i].username%>
-                    </td>
-                    <td class="w mail" value=<%= result[i].id %>>
-                        <%=result[i].email%>
-                    </td>
-                    <td class="w admin" value=<%= result[i].id %>>
-                        <%if(result[i].admin){%>
-                        Yes
-                        <%}else{%>
-                        No
+        <h1 class="mt-5">
+            Members Of The Society
+        </h1>
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Members Of The Society
+                        </th>
+                        <th>
+                            E-mail
+                        </th>
+                        <th>
+                            Is a Committee Member
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th colspan='4'>
+                            Year: 2021
+                        </th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <% for(var i=0;i<result.length;i++){%>
+                        <tr>
+                            <td class="w user" value=<%=result[i].id %>>
+                                <%=result[i].username%>
+                            </td>
+                            <td class="w mail" value=<%=result[i].id %>>
+                                <%=result[i].email%>
+                            </td>
+                            <td class="w admin" value=<%=result[i].id %>>
+                                <%if(result[i].admin){%>
+                                    Yes
+                                    <%}else{%>
+                                        No
+                                        <%}%>
+                            </td>
+                            <td class='select' value=<%=result[i].id %>>
+                                <a class='button' href='#' style="font-size: 1.7rem;">
+                                    Select
+                                </a>
+                            </td>
+                        </tr>
                         <%}%>
-                    </td>
-                    <td class='select' value=<%= result[i].id %>>
-                        <a class='button' href='#' style="font-size: 1.7rem;">
-                            Select
-                        </a>
-                    </td>
-                </tr>
-                <%}%>
-            </tbody>
-        </table>
-        <div class='detail'>
-            <div class='detail-container'>
-                <dl>
-                    <dt>
-                        Member Name
-                    </dt>
-                    <dd id="name">
+                </tbody>
+            </table>
+            <div class='detail'>
+                <div class='detail-container'>
+                    <dl>
+                        <dt>
+                            Member Name
+                        </dt>
+                        <dd id="name">
 
-                    </dd>
-                    <dt>
-                        E-mail
-                    </dt>
-                    <dd id="mail">
-                        
-                    </dd>
-                    <dt>
-                        Flat No
-                    </dt>
-                    <dd id="flat">
-                       
-                    </dd>
-                    <dt>
-                        Phone-Number
-                    </dt>
-                    <dd id="phone">
-                        555-555-5555
-                    </dd>
-                    <dt>
-                        Last Update
-                    </dt>
-                    <dd>
-                        Jun 20 2014
-                    </dd>
-                    <dt>
-                        Notes
-                    </dt>
-                    <dd>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis
-                        eros. Nullam
-                        malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-                    </dd>
-                </dl>
+                        </dd>
+                        <dt>
+                            E-mail
+                        </dt>
+                        <dd id="mail">
+
+                        </dd>
+                        <dt>
+                            Flat No
+                        </dt>
+                        <dd id="flat">
+
+                        </dd>
+                        <dt>
+                            Phone-Number
+                        </dt>
+                        <dd id="phone">
+                            555-555-5555
+                        </dd>
+                        <dt>
+                            Last Update
+                        </dt>
+                        <dd>
+                            Jun 20 2014
+                        </dd>
+                        <dt>
+                            Notes
+                        </dt>
+                        <dd>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat
+                            mattis
+                            eros. Nullam
+                            malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a,
+                            pede.
+                        </dd>
+                    </dl>
+                </div>
+                <div class='detail-nav'>
+                    <button class='close'>
+                        Close
+                    </button>
+                </div>
             </div>
-            <div class='detail-nav'>
-                <button class='close'>
-                    Close
+        </main>
+        <div class="update container-fluid d-flex flex-column justify-content-center">
+            <h1 class="mt-4">Please Select the Detail You Want To Update</h1>
+            <div class="dropdown button-update">
+                <button class="btn btn-secondary dropdown-toggle" id="update_string" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Please Select The Detail To Update
                 </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="background-color: darkblue;">
+                    <li value="username" name="username" class="dropdown-item update_options" onclick="update_detail(event)">Username</li>
+                    <li value="phoneno" name="phoneno" class="dropdown-item update_options" onclick="update_detail(event)">Phone Number</li>
+                    <li value="flatno" name="flatno" class="dropdown-item update_options" onclick="update_detail(event)">Flat Number</li>
+                    <li value="email" name="email" class="dropdown-item update_options" onclick="update_detail(event)">Email Address</li>
+                    <li value="update_password" name="update_password" class="dropdown-item update_options" onclick="update_detail(event)">Password</li>
+                </ul>
+            </div>
+              </div>
+              <div class="container">
+                  <form class="" id="update_form" action="#">
+                      <div id="username" name="username" class="d-none selectall ">
+                          <label for="username1">Username</label>
+                          <input type="text" id="username1" name="username1" class="form-control">
+                      </div>
+                      <div id="phoneno" name="phoneno" class="d-none selectall ">
+                          <label for="phoneno1">Phone Number</label>
+                          <input type="text" id="phoneno1" name="phoneno1" class="form-control">
+                      </div>
+                      <div id="flatno" name="flatno" class="d-none selectall ">
+                          <label for="flatno1">Flat Number</label>
+                          <input type="text" id="flatno1" name="flatno1" class="form-control">
+                      </div>
+                      <div id="email" name="email" class="d-none selectall ">
+                          <label for="email1">Email</label>
+                          <input type="email" id="email1" name="email1" class="form-control">
+                      </div>
+                      <div id="update_password" name="update_password" class="d-none selectall ">
+                          <label for="update_password1">Password</label>
+                          <input type="password" id="update_password1" name="update_password1" class="form-control">
+                      </div>
+                      <div class="d-flex justify-content-center d-none mt-3" id="update">
+                        <input type="submit" class="btn btn-primary" value="Update Details">
+                      </div>
+                  </form>
             </div>
         </div>
-    </main>
-    <script src="/members/members.js"></script>
-  
-    <script src="/members/jquery_members.js"></script>
-   
+        <script>
+            function update_detail(event) {
+                document.getElementById("update_string").innerHTML = event.target.innerHTML;
+                var Element = document.getElementById(event.target.getAttribute("name"));
+                var attribute = Element.getAttribute("name");
+                var Multiple_divs = document.querySelectorAll(".selectall")
+                Multiple_divs.forEach((element_div)=>{
+                    if(element_div.getAttribute("name")===attribute){
+                        console.log(element_div)
+                        element_div.classList.remove("d-none")
+                    }
+                    else if(!element_div.classList.contains("d-none")){
+                        element_div.classList.add("d-none");
+                    }
+                })
+                document.getElementById("update").classList.remove("d-none");
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+            integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+            integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+            crossorigin="anonymous"></script>
+        <script src="/members/members.js"></script>
+        <script src="/members/jquery_members.js"></script>
 </body>
 
 </html>

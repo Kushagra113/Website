@@ -43,4 +43,7 @@ $(document).ready(function(){
            }
        }) 
     })
-})
+    // $(".update_options").click(function(e){
+    //     console.log(e);
+    // });
+});

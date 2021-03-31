@@ -12,7 +12,8 @@ var url ;
 require("../api/weather_api")().then((data)=>{
   weatherdata=data[0];
   url=data[1]
-});
+})
+
 
 // Admin Home Page
 router.get("/home/alldetails", auth_function.ensureAdmin, (req, res) => {
