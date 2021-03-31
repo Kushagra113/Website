@@ -7,7 +7,7 @@ const auth_function = require("../config/auth");
 const contact_function = require("../config/contact_details");
 const getalldata = require("../config/getalldata");
 var weatherdata ;
-
+var url ;
 // Fetching Weather DATA (Request To Weater API)
 require("../api/weather_api")().then((data)=>{
   weatherdata=data[0];
