@@ -43,7 +43,45 @@ $(document).ready(function(){
            }
        }) 
     })
-    // $(".update_options").click(function(e){
-    //     console.log(e);
-    // });
+    $("#update_btn").click(function(e){
+        e.preventDefault()
+        var input_value;
+        var update = $("#update_string").html();
+        console.log(update);
+        var element_li = $(".update_options");
+        element_li.each((index,element)=>{
+            if(element.innerHTML==update){
+                input_value=$("#"+$(element).attr("value")).find("#"+$(element).attr("value")+"1").val();
+                if(!input_value){
+                    alert("Please Enter Value For "+update+" To Update");
+                }
+                else if($(element).attr("value")==="Flat_no" && input_value.length!=4){
+                    alert("Please Enter Valid Flat Number");
+                }
+                else if($(element).attr("value")==="phone_no" && input_value.length!=10){
+                    alert("Please Enter Valid Phone Number");
+                }
+                else{
+                    var update_detail = $(element).attr("value");
+                    $.ajax({
+                        url:"/admin/members/updatedetails",
+                        method:"PUT",
+                        datatype:"json",
+                        data:{input_value:input_value,update_detail:update_detail},
+                        success:function(response){
+                            if(response.msg==="success"){
+                                alert("Updation Of Details Is SuccessFull");
+                            }
+                            else if(response.msg="error"){
+                                alert("Some Error Occured Try Again!")
+                            }
+                        },
+                        error:function(){
+                            alert("Server Error Ocurred Please Try Again!");
+                        }
+                    })
+                }
+            }
+        })
+    })
 });

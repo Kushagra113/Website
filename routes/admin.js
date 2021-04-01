@@ -6,6 +6,7 @@ const complaints = require("../config/crud");
 const auth_function = require("../config/auth");
 const contact_function = require("../config/contact_details");
 const getalldata = require("../config/getalldata");
+const update = require("../config/updatedetails");
 var weatherdata ;
 var url ;
 // Fetching Weather DATA (Request To Weater API)
@@ -238,6 +239,18 @@ router.get("/members", auth_function.ensureAdmin, (req, res) => {
     }
   });
 });
+
+router.put("/members/updatedetails",auth_function.ensureAdmin,(req,res)=>{
+  const {input_value,update_detail} = req.body;
+  update.update(input_value,update_detail,req.user.id,(err,result)=>{
+    if(err){
+      res.json({msg:"error"})
+    }
+    else{
+      res.json({msg:"success"})
+    }
+  })
+})
 
 router.post("/getiddata", auth_function.ensureAdmin, (req, res) => {
   const id = req.body.id;

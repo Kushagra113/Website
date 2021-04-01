@@ -123,46 +123,50 @@
         <div class="update container-fluid d-flex flex-column justify-content-center">
             <h1 class="mt-4">Please Select the Detail You Want To Update</h1>
             <div class="dropdown button-update">
-                <button class="btn btn-secondary dropdown-toggle" id="update_string" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle" id="update_string" type="button"
+                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Please Select The Detail To Update
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="background-color: darkblue;">
-                    <li value="username" name="username" class="dropdown-item update_options" onclick="update_detail(event)">Username</li>
-                    <li value="phoneno" name="phoneno" class="dropdown-item update_options" onclick="update_detail(event)">Phone Number</li>
-                    <li value="flatno" name="flatno" class="dropdown-item update_options" onclick="update_detail(event)">Flat Number</li>
+                    <li value="username" name="username" class="dropdown-item update_options"
+                        onclick="update_detail(event)">Username</li>
+                    <li value="phone_no" name="phone_no" class="dropdown-item update_options"
+                        onclick="update_detail(event)">Phone Number</li>
+                    <li value="Flat_no" name="Flat_no" class="dropdown-item update_options"
+                        onclick="update_detail(event)">Flat Number</li>
                     <li value="email" name="email" class="dropdown-item update_options" onclick="update_detail(event)">Email Address</li>
-                    <li value="update_password" name="update_password" class="dropdown-item update_options" onclick="update_detail(event)">Password</li>
+                    <li value="update_password" name="update_password" class="dropdown-item update_options"
+                        onclick="update_detail(event)">Password</li>
                 </ul>
             </div>
-              </div>
-              <div class="container">
-                  <form class="" id="update_form" action="#">
-                      <div id="username" name="username" class="d-none selectall ">
-                          <label for="username1">Username</label>
-                          <input type="text" id="username1" name="username1" class="form-control">
-                      </div>
-                      <div id="phoneno" name="phoneno" class="d-none selectall ">
-                          <label for="phoneno1">Phone Number</label>
-                          <input type="text" id="phoneno1" name="phoneno1" class="form-control">
-                      </div>
-                      <div id="flatno" name="flatno" class="d-none selectall ">
-                          <label for="flatno1">Flat Number</label>
-                          <input type="text" id="flatno1" name="flatno1" class="form-control">
-                      </div>
-                      <div id="email" name="email" class="d-none selectall ">
-                          <label for="email1">Email</label>
-                          <input type="email" id="email1" name="email1" class="form-control">
-                      </div>
-                      <div id="update_password" name="update_password" class="d-none selectall ">
-                          <label for="update_password1">Password</label>
-                          <input type="password" id="update_password1" name="update_password1" class="form-control">
-                      </div>
-                      <div class="d-flex justify-content-center d-none mt-3" id="update">
-                        <input type="submit" class="btn btn-primary" value="Update Details">
-                      </div>
-                  </form>
-            </div>
+        </div>
+        <div class="container">
+            <form class="" id="update_form" action="#">
+                <div id="username" name="username" class="d-none selectall ">
+                    <label for="username1">Username</label>
+                    <input type="text" id="username1" name="username1" class="form-control">
+                </div>
+                <div id="phone_no" name="phone_no" class="d-none selectall ">
+                    <label for="phoneno1">Phone Number</label>
+                    <input type="text" id="phone_no1" name="phone_no1" class="form-control">
+                </div>
+                <div id="Flat_no" name="Flat_no" class="d-none selectall ">
+                    <label for="Flat_no1">Flat Number</label>
+                    <input type="text" id="Flat_no1" name="Flat_no1" class="form-control">
+                </div>
+                <div id="email" name="email" class="d-none selectall ">
+                    <label for="email1">Email</label>
+                    <input type="email" id="email1" name="email1" class="form-control">
+                </div>
+                <div id="update_password" name="update_password" class="d-none selectall ">
+                    <label for="update_password1">Password</label>
+                    <input type="password" id="update_password1" name="update_password1" class="form-control">
+                </div>
+                <div class="d-flex justify-content-center d-none mt-3" id="update">
+                    <input type="submit" class="btn btn-primary" id="update_btn" value="Update Details">
+                </div>
+            </form>
+        </div>
         </div>
         <script>
             function update_detail(event) {
@@ -170,12 +174,12 @@
                 var Element = document.getElementById(event.target.getAttribute("name"));
                 var attribute = Element.getAttribute("name");
                 var Multiple_divs = document.querySelectorAll(".selectall")
-                Multiple_divs.forEach((element_div)=>{
-                    if(element_div.getAttribute("name")===attribute){
+                Multiple_divs.forEach((element_div) => {
+                    if (element_div.getAttribute("name") === attribute) {
                         console.log(element_div)
                         element_div.classList.remove("d-none")
                     }
-                    else if(!element_div.classList.contains("d-none")){
+                    else if (!element_div.classList.contains("d-none")) {
                         element_div.classList.add("d-none");
                     }
                 })
