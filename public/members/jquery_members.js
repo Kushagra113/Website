@@ -64,20 +64,53 @@ $(document).ready(function(){
                 else{
                     var update_detail = $(element).attr("value");
                     $.ajax({
-                        url:"/admin/members/updatedetails",
-                        method:"PUT",
-                        datatype:"json",
-                        data:{input_value:input_value,update_detail:update_detail},
-                        success:function(response){
-                            if(response.msg==="success"){
-                                alert("Updation Of Details Is SuccessFull");
+                        url: '/checkadmin',
+                        method: 'get',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.msg == "success") {
+                                $.ajax({
+                                    url:"/admin/members/updatedetails",
+                                    method:"PUT",
+                                    datatype:"json",
+                                    data:{input_value:input_value,update_detail:update_detail},
+                                    success:function(response){
+                                        if(response.msg==="success"){
+                                            alert("Updation Of Details Is SuccessFull");
+                                            window.location.replace("http://localhost:3000/admin/members");
+                                        }
+                                        else if(response.msg="error"){
+                                            alert("Some Error Occured Try Again!")
+                                        }
+                                    },
+                                    error:function(){
+                                        alert("Server Error Ocurred Please Try Again!");
+                                    }
+                                })
                             }
-                            else if(response.msg="error"){
-                                alert("Some Error Occured Try Again!")
+                            else if (response.msg == "user_error") {
+                                $.ajax({
+                                    url:"/users/members/updatedetails",
+                                    method:"PUT",
+                                    datatype:"json",
+                                    data:{input_value:input_value,update_detail:update_detail},
+                                    success:function(response){
+                                        if(response.msg==="success"){
+                                            alert("Updation Of Details Is SuccessFull");
+                                            window.location.replace("http://localhost:3000/users/members");
+                                        }
+                                        else if(response.msg="error"){
+                                            alert("Some Error Occured Try Again!")
+                                        }
+                                    },
+                                    error:function(){
+                                        alert("Server Error Ocurred Please Try Again!");
+                                    }
+                                })
                             }
-                        },
-                        error:function(){
-                            alert("Server Error Ocurred Please Try Again!");
+                            else {
+                                alert("server Error Occured");
+                            }
                         }
                     })
                 }

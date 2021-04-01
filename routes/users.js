@@ -8,6 +8,7 @@ const complaints = require("../config/crud");
 const payments = require("../config/payment_details_insert");
 const auth_function = require("../config/auth");
 const getalldata = require("../config/getalldata");
+const update = require("../config/updatedetails");
 var weatherdata ;
 var url;
 // Fetching Weather DATA (Request To Weater API)
@@ -285,6 +286,19 @@ router.post("/getiddata", auth_function.ensureAuthenticated, (req, res) => {
 router.get("/game", auth_function.ensureAuthenticated, (req, res) => {
     res.render("game");
 });
+
+
+router.put("/members/updatedetails",auth_function.ensureAuthenticated,(req,res)=>{
+    const {input_value,update_detail} = req.body;
+    update.update(input_value,update_detail,req.user.id,(err,result)=>{
+      if(err){
+        res.json({msg:"error"})
+      }
+      else{
+        res.json({msg:"success"})
+      }
+    })
+  })
 
 // Post Requests
 router.post("/sign", (req, res) => {

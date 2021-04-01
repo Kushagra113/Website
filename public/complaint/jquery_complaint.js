@@ -39,7 +39,6 @@ $(document).ready(function () {
         var id = $(this).parent().find('button.del').val();
         var complaint = [];
         complaint.push($(this).parent().parent().find(".complaint_text").html());
-        var result;
         $.ajax({
             url: '/checkadmin',
             method: 'get',
