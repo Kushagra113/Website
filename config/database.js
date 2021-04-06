@@ -32,7 +32,7 @@ con.query("create database if not exists users", (err) => {
 
 // Creating Table If Not Exists
 con.query(
-  "create table if not exists account(id int  auto_increment primary key,username varchar(50),email varchar(50) unique,password varchar(200),admin boolean default 0,Phone_no varchar(10),Flat_no varchar(5),Gender varchar(10));",
+  "create table if not exists account(id int  auto_increment primary key,username varchar(50) unique,email varchar(50) unique,password varchar(200),admin boolean default 0,Phone_no varchar(10) unique,Flat_no varchar(5),Gender varchar(10));",
   (err) => {
     if (err) {
       console.log(err);

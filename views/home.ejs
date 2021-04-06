@@ -98,13 +98,13 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/images/Living_Room.jpg" class="d-block w-100" alt="...">
+                <img src="/images/Living_Room.jpg" class="d-block w-100" alt="..." data-interval="1000">
             </div>
             <div class="carousel-item">
-                <img src="/images/Second_room.jpg" class="d-block w-100" alt="...">
+                <img src="/images/Second_room.jpg" class="d-block w-100" alt="..." " data-interval="1000">
             </div>
             <div class="carousel-item">
-                <img src="/images/imgonline-com-ua-resize-PJGglQ8ghBxJx.jpg" class="d-block w-100 op" alt="...">
+                <img src="/images/imgonline-com-ua-resize-PJGglQ8ghBxJx.jpg" class="d-block w-100 op" alt="..." " data-interval="1000">
             </div>
         </div>
 
@@ -223,7 +223,7 @@
                 <div class="collapse mb-3" id="collapseExample1">
                     <div class="card card-body">
                         <a class="d-flex justify-content-center" <%if(user.admin){%>href='/admin/game' <%}else{%>href='/users/game' <%}%>
-                                    class="game" style="font-size:16px">#KT4CR </a>
+                                    class="game" style="font-size:16px">Simon Says</a>
                     </div>
                 </div>
                 </div>
@@ -231,6 +231,7 @@
 
                 <div class="footer-section" id="contact">
                     <div class="container">
+                        <%if(!user.admin){%>
                         <div class="contact-header">
                             <h3> contact</h3>
                             <p></p>
@@ -239,19 +240,13 @@
                         <div class="contact">
                             <form>
                                 <div class="col-md-4 contactgrid">
-                                    <input id="contact_name" type="text" class="text" value="name"
-                                        onfocus="this.value = '';"
-                                        onblur="if (this.value == '') {this.value = 'name';}">
+                                    <input id="contact_name" type="text" class="text" disabled value=<%=user.username%> disabled>
                                 </div>
                                 <div class="col-md-4 contactgrid">
-                                    <input id="contact_email" type="text" class="text" value="email"
-                                        onfocus="this.value = '';"
-                                        onblur="if (this.value == '') {this.value = 'email';}">
+                                    <input id="contact_email" type="text" class="text" disabled value=<%=user.email%>>
                                 </div>
                                 <div class="col-md-4 contactgrid">
-                                    <input id="contact_phone" type="text" class="text" value="phone"
-                                        onfocus="this.value = '';"
-                                        onblur="if (this.value == '') {this.value = 'phone';}">
+                                    <input id="contact_phone" type="text" class="text" disabled value=<%=user.phone_no%>>
                                 </div>
                                 <div class="col-md-8 contactgrid1">
                                     <textarea id="contact_message" minlength="10"
@@ -264,6 +259,7 @@
                                 <div class="clearfix"></div>
                             </form>
                         </div>
+                        <%}%>
                         <div class="footer-bottom">
 
                             <p>&copy; 2021 . All rights Reserved </p>

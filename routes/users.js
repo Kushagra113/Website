@@ -29,9 +29,9 @@ router.get(
                     "Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused"
                 );
             } else {
-                complaints.getcomplaint_not_resolved((err, result_c) => {
+                complaints.getidcomplaint_not_resolved(req.user.id,(err, result_c) => {
                     complaint_number = result_c.length;
-                    complaints.getallresolve((err, result_r) => {
+                    complaints.getidresolve(req.user.id,(err, result_r) => {
                       resolve_number = result_r.length;
                        if (result.length > 0) {
                         res.render("home", {
@@ -70,9 +70,9 @@ router.get("/home/lastmonth", auth_function.ensureAuthenticated, (req, res) => {
                 "Error Displaying Home Page. Please Try Again Later! Sorry For the Inconvenience Caused"
             );
         } else {
-            complaints.getcomplaint_not_resolved((err, result_c) => {
+            complaints.getidcomplaint_not_resolved(req.user.id,(err, result_c) => {
                 complaint_number = result_c.length;
-                complaints.getallresolve((err, result_r) => {
+                complaints.getidresolve(req.user.id,(err, result_r) => {
                   resolve_number = result_r.length;
                    if (result.length > 0) {
                     res.render("home", {
@@ -363,12 +363,12 @@ router.post("/sign", (req, res) => {
 
     // Validation Passed
     else {
-        sql = "select email from account where email=?";
-        con.query(sql, [email], (err, result) => {
+        sql = "select email from account where email=? or username=?";
+        con.query(sql, [email,Username], (err, result) => {
             if (err) {
                 req.flash("error_msg", "Server Error Occured");
             } else if (result.length == 1) {
-                errors.push({ msg: "Email Is already Registered" });
+                errors.push({ msg: "Email or Username Is already Registered" });
                 res.render("sign", {
                     errors,
                     Username,

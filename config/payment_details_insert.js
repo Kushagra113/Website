@@ -106,7 +106,7 @@ module.exports.alldetails = (id, cb) => {
 }
 
 module.exports.lastmonth = (id, cb) => {
-    sql = `select date from payments where id=? limit 1`;
+    sql = `select date from payments where id=? order by date desc limit 1;`;
     con.query(sql, id, (err, result) => {
         if (err) {
             console.log(err);

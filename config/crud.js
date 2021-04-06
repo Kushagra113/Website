@@ -117,8 +117,20 @@ module.exports.getidcomplaint=(id,cb)=>{
 }
 
 
-module.exports.getcomplaint_not_resolved=(id,cb)=>{
-    con.query("select * from complaints where resolved=0",id,(err,result)=>{
+module.exports.getcomplaint_not_resolved=(cb)=>{
+    con.query("select * from complaints where resolved=0",(err,result)=>{
+        if(err){
+            console.log(err);
+            cb(err,null);
+        }
+        else{
+            cb(null,result)
+        }
+    })
+}
+
+module.exports.getidcomplaint_not_resolved=(id,cb)=>{
+    con.query("select * from complaints where id=? and resolved=0",id,(err,result)=>{
         if(err){
             console.log(err);
             cb(err,null);
